@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div id="intro-card">
+    {% include 'intros/challenge2_intro.html' %}
+  </div>
+
+  <div class="challenge-content challenge2-content d-none">
+    <div class="container-fluid py-3">
+      <!-- Add header banner at the top -->
+      <div class="row justify-content-center mb-4">
+        <div class="col-lg-10">
+          <div class="alert alert-warning text-center p-3 shadow-sm">
+            <div class="row align-items-center">
+              <!-- AppSpider logo on left -->
+              <div class="col-md-3 text-end">
+                <img src="{{ url_for('static', filename='images/appspider-icon.png') }}" alt="AppSpider" 
+                     style="height: 120px; width: auto; object-fit: contain;">
+              </div>
+              <!-- Title on right -->
+              <div class="col-md-9 text-start">
+                <h2 class="mb-0" style="color: #FF6200; font-size: 1.5rem;">
+                  AppSpider Security Scanner - Find and Fix Web Vulnerabilities!
+                </h2>
+                <p class="mb-0 mt-2">Search for security problems then drag and drop the correct fixes to solve them!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-10 d-flex flex-column align-items-center">
+
+          <div id="scanner-section" class="text-center mb-4">
+            <!-- Enhanced scan button with glowing effect -->
+            <button id="scan-btn" class="btn btn-warning btn-lg fw-bold px-4 py-2 scan-btn-glow">
+              <i class="fas fa-search me-2"></i>START SECURITY SCAN
+            </button>
+            <div class="scanner-animation mt-3 d-none">
+              <img src="{{ url_for('static', filename='images/robot-scan.gif') }}" alt="Scanning Robot" class="img-fluid" style="max-width: 700px;">
+            </div>
+          </div>
+
+          <div id="fake-site-wrapper">
+            <div class="card shadow position-relative mb-3" style="width: 100%;">
+              <div class="card-header bg-light d-flex align-items-center">
+                <span class="circle red me-1"></span>
+                <span class="circle yellow me-1"></span>
+                <span class="circle green me-2"></span>
+                <img id="url-bar" src="{{ url_for('static', filename='images/wacky-hacky-url.png') }}" alt="URL bar" style="height: 50px; width: 300px;">
+              </div>
+              <div class="card-body fake-site position-relative" style="font-size: 0.8rem;">
+                <div class="login-admin-wrapper d-flex flex-column flex-md-row align-items-center mb-3" style="gap: 0.5rem;">
+                  <img src="{{ url_for('static', filename='images/wacky-hacky.png') }}" alt="Logo" style="width: 150px;">
+                  <div class="d-flex align-items-center ms-0 ms-md-2" style="gap: 0.5rem;">
+                    <input type="text" class="form-control form-control-sm" placeholder="Username" readonly style="max-width: 150px;">
+                    <input type="text" class="form-control form-control-sm" placeholder="Password" value="1234" title="Weak password!" readonly style="max-width: 150px;">
+                    <button class="btn btn-success btn-sm" disabled>Login</button>
+                  </div>
+                  <a href="#" class="btn btn-danger btn-sm fw-bold ms-0 ms-md-2" id="admin-link" style="font-size: 0.8rem;">Admin Panel Access</a>
+                </div>
+
+                <hr class="my-3">
+                <h3 class="text-primary" style="font-size: 1.2rem;">Welcome to the Gadget Shop!</h3>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
+                  {% set products = [
+                    ('SuperGadget 3000','broken-image.png','The SuperGadget 3000 – sometimes super, sometimes… you decide.'),
+                    ('MegaTool 2.0','product-image.png','MegaTool 2.0: a tool so mega it practically builds more tools.'),
+                    ('AppSpider in a Can','appspider-can.png','AppSpider in a Can – unleash a web scan with a pop!')
+                  ] %}
+                  {% for name,img,desc in products %}
+                  <div class="col">
+                    <div class="card h-100 d-flex" style="font-size: 0.7rem;">
+                      <div class="d-flex align-items-center p-2">
+                        <img src="{{ url_for('static', filename='images/' ~ img) }}" alt="{{ name }}" class="flex-shrink-0 me-2" style="width: 60px; height: 60px; object-fit: contain;">
+                        <div>
+                          <h5 class="mb-1" style="font-size: 0.8rem;">{{ name }}</h5>
+                          <p class="mb-0" style="font-size: 0.7rem;">{{ desc }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+
+                <hr class="my-3">
+                <h3 class="text-primary" style="font-size: 1.2rem;">Upload Your Favourite Gadget</h3>
+                <form class="upload-form row align-items-center g-2">
+                  <div class="col-md-3 text-center">
+                    <img id="upload-status" src="{{ url_for('static', filename='images/upload-anything.png') }}" alt="Upload status" class="img-thumbnail w-75">
+                  </div>
+                  <div class="col-md-9">
+                    <label for="upload" style="font-size: 0.8rem;">Upload a gadget photo:</label>
+                    <input type="file" id="upload" class="form-control form-control-sm" disabled>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div id="game-area" class="d-none">
+            <h3 class="text-primary text-center" style="font-size: 1.2rem;">Secure WackyHacky!</h3>
+            
+            <div class="row" id="vuln-fix-wrapper" style="min-height: 320px;">
+              <div class="col-md-6">
+                <h5 class="text-danger text-center fw-bold">Vulnerabilities</h5>
+                <div id="vuln-zone" class="d-flex flex-wrap justify-content-center gap-3"></div>
+              </div>
+              <div class="col-md-6">
+                <h5 class="text-success text-center fw-bold">Fixes</h5>
+                <div id="fix-zone" class="d-flex flex-wrap justify-content-center gap-3"></div>
+              </div>
+            </div>
+
+            <div id="original-vulns" class="d-none">
+              {% set items = [
+                {'img':'upload-anything.png','desc':'Accepting any file type','fixid':'upload-fix','label':'Restrict upload types'},
+                {'img':'broken-image.png','desc':'Missing image fallback','fixid':'img-fix','label':'Use image fallback'},
+                {'img':'password-weak.png','desc':'Weak passwords','fixid':'pw-fix','label':'Use strong passwords'},
+                {'img':'admin-link.png','desc':'Public admin panel','fixid':'admin-fix','label':'Hide admin URL'},
+                {'img':'open-lock.png','desc':'Insecure HTTP','fixid':'https-fix','label':'Use HTTPS'}
+              ] %}
+              {% for item in items %}
+              <div class="droppable-vuln text-center" data-expect="{{ item.fixid }}" style="width: 180px; height: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1rem;">
+                <img src="{{ url_for('static', filename='images/' ~ item.img) }}" class="mb-2" style="height: 50px; width: 50px; object-fit: contain;">
+                <p class="small mb-0" style="color: #FF6200; font-size: 0.9rem;">{{ item.desc }}</p>
+              </div>
+              {% endfor %}
+              {% for item in items %}
+              <div class="draggable-fix card p-2 text-center" data-fix="{{ item.fixid }}" draggable="true" 
+                style="width: 160px; height: 75px; display: flex; align-items: center; justify-content: center; 
+                background: linear-gradient(135deg, #e8f5ff 0%, #d4f1ff 100%); 
+                border: 2px solid #92c9ff; 
+                box-shadow: 0 3px 6px rgba(0,0,0,0.1); 
+                transition: all 0.2s ease;">
+                <div class="card-body p-1">
+                  <span style="font-size: 0.9rem; font-weight: bold; color: #0066cc;">{{ item.label }}</span>
+                  {% if item.fixid == 'upload-fix' %}
+                    <i class="fas fa-file-image text-success"></i>
+                  {% elif item.fixid == 'img-fix' %}
+                    <i class="fas fa-image text-primary"></i>
+                  {% elif item.fixid == 'pw-fix' %}
+                    <i class="fas fa-key text-warning"></i>
+                  {% elif item.fixid == 'admin-fix' %}
+                    <i class="fas fa-user-shield text-danger"></i>
+                  {% elif item.fixid == 'https-fix' %}
+                    <i class="fas fa-lock text-success"></i>
+                  {% endif %}
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+
+            <div id="feedback" class="mt-4 mb-3 py-3 px-3 text-center rounded w-100" style="font-size: 0.9rem; min-height: 40px; display: block; margin-left: auto; margin-right: auto;"></div>
+            <div class="text-center mt-2">
+              <button id="submit-fixes" class="btn btn-warning btn-sm">Submit Matches</button>
+              <button id="reset-fixes" class="btn btn-secondary btn-sm d-none">Try Again</button>
+            </div>
+          </div>
+          <div id="attempts-counter" class="attempts-counter">
+              <span class="attempts-label">Attempts remaining:</span>
+              <span id="attempts-circles"></span>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add custom styles for the glowing buttons -->
+  <style>
+    .scan-btn-glow {
+      box-shadow: 0 0 10px #ffc107;
+      transition: all 0.3s ease;
+      animation: pulse-glow 2s infinite;
+    }
+    
+    .scan-btn-glow:hover {
+      box-shadow: 0 0 20px #ffc107;
+      transform: translateY(-3px);
+    }
+    
+    @keyframes pulse-glow {
+      0% { box-shadow: 0 0 10px #ffc107; }
+      50% { box-shadow: 0 0 20px #ffc107, 0 0 30px rgba(255, 193, 7, 0.5); }
+      100% { box-shadow: 0 0 10px #ffc107; }
+    }
+  </style>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/challenge2.js') }}"></script>
+  
+  <!-- Add JavaScript to enhance the Let's get matching button -->
+  <script>
+    // Add enhanced styling to the dynamically created "Let's get matching" button
+    document.addEventListener('DOMContentLoaded', function() {
+      // Monitor for the proceed-btn being added to the DOM
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.addedNodes) {
+            mutation.addedNodes.forEach(function(node) {
+              if (node.id === 'proceed-btn') {
+                // Apply enhanced styling
+                node.className = 'btn btn-success btn-lg fw-bold px-4 py-2 mt-4 scan-btn-glow';
+                node.innerHTML = '<i class="fas fa-puzzle-piece me-2"></i>LET\'S GET MATCHING!';
+              }
+            });
+          }
+        });
+      });
+      
+      // Start observing the scanner section for changes
+      observer.observe(document.getElementById('scanner-section'), { 
+        childList: true 
+      });
+    });
+  </script>
+{% endblock %}

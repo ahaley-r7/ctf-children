@@ -1,0 +1,108 @@
+{# templates/intros/challenge4_intro.html #}
+<div class="container-fluid" style="background-color: #FF6200; padding: 3rem 1rem;">
+  <div class="d-flex align-items-center justify-content-center">
+    <img src="{{ url_for('static', filename='images/rapid7-moose.png') }}"
+         alt="Rapid7 Moose Mascot"
+         style="height: 80px; margin-right: 20px;">
+    <h1 class="empower-heading text-white mb-0">Challenge 4: Hidden Passwords</h1>
+  </div>
+</div>
+
+<div class="container my-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="card shadow-sm p-4 mb-4"">
+        <h3 class="text-center mb-3" style="color: #FF6200;">Why Passwords Matter</h3>
+        
+        <p class="lead">
+          Trying to remember dozens of passwords is like juggling flaming marshmallows—fun for about a second, then chaos!
+        </p>
+        
+        <div class="row align-items-center mb-4">
+          <div class="col-md-7">
+            <p>
+              Many people (even adults!) use the same password everywhere or pick something too easy to guess.
+            </p>
+            <p>
+              Moose know the smartest way is a <strong>password manager</strong>, your very own digital vault that never forgets.
+            </p>
+            <p>
+              Here at Rapid7, we uncover millions of stolen passwords every day. That's why we need to learn to lock yours up safely!
+            </p>
+          </div>
+          <div class="col-md-5 text-center">
+            <img src="{{ url_for('static', filename='images/secure-password.png') }}" 
+                 alt="Password Security" 
+                 class="img-fluid rounded" 
+                 style="max-height: 180px;">
+            <p class="small text-muted mt-2">Protect your digital secrets!</p>
+          </div>
+        </div>
+        
+        <div class="bg-light p-3 rounded mb-4">
+          <h5 class="mb-3">Password Security Tips:</h5>
+          <div class="row text-center g-3">
+            <div class="col-md-4">
+              <div class="card h-100 border-danger">
+                <div class="card-body">
+                  <h6 class="card-title">Unique Passwords</h6>
+                  <p class="card-text small">Never use the same password on multiple websites</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100 border-warning">
+                <div class="card-body">
+                  <h6 class="card-title">Complex Combinations</h6>
+                  <p class="card-text small">Mix uppercase, lowercase, numbers, and symbols</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100 border-info">
+                <div class="card-body">
+                  <h6 class="card-title">Password Manager</h6>
+                  <p class="card-text small">Use a secure app to remember all your passwords</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <h4 class="mt-4 mb-3 text-center" style="color: #FF6200;">How to Play</h4>
+        
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="card h-100 border-success">
+              <div class="card-body">
+                <h5 class="card-title">Your Mission</h5>
+                <p class="card-text">You'll need to find Fred's password! He's lost it somewhere on his blog.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card h-100 border-warning">
+              <div class="card-body">
+                <h5 class="card-title">Password Detective</h5>
+                <p class="card-text">Read all the blog posts carefully and look for clues. Sometimes passwords are hiding in plain sight!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="alert alert-info">
+          <div class="d-flex align-items-center">
+            <div class="me-3">🔍</div>
+            <div>
+              <strong>Hint:</strong> Try looking at different parts of the text. Does anything look out of place?
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-4">
+        <button id="start-btn" class="btn btn-next fw-bold">Start Password Hunt 🔎</button>
+      </div>
+    </div>
+  </div>
+</div>

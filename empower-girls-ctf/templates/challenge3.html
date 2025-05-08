@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {# Intro hidden card #}
+  <div id="intro-card">
+    {% include 'intros/challenge3_intro.html' %}
+  </div>
+
+  {# Encryption challenge, toggled by script.js #}
+  <div class="challenge-content challenge3-content d-none">
+    <div class="card terminal-card bg-black text-success shadow-lg">
+      <div class="card-body max-height:700px;">
+        <h4 class="text-center encrypted-header mb-3 fw-bold">Encrypted Message</h4>
+        <pre id="scrambled-text" class="text-center fs-4 bg-black border-success rounded p-3">???</pre>
+        <p id="instruction-text" class="text-center text-light fst-italic typewriter-text">This message has been 'spun' several times using a letter shifting technique. Your job is to spin it back to its original form by choosing the correct number.</p>
+
+        <div class="my-3 text-center">
+          <p id="prompt-text" class="text-light mb-2 typewriter-text">Choose a number to spin and decode the message:</p>
+          <div class="mx-auto" style="max-width: 400px;">
+            <div class="btn-group btn-group-lg" role="group" aria-label="Shift options">
+              <button type="button" class="btn btn-outline-success shift-btn" data-shift="0">0</button>
+              <button type="button" class="btn btn-outline-success shift-btn" data-shift="0">0</button>
+              <button type="button" class="btn btn-outline-success shift-btn" data-shift="0">0</button>
+              <button type="button" class="btn btn-outline-success shift-btn" data-shift="0">0</button>
+              <button type="button" class="btn btn-outline-success shift-btn" data-shift="0">0</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="mx-auto" style="max-width: 500px;">
+          <div class="decoded-preview bg-success bg-opacity-25 rounded border border-success text-white fw-bold p-3 text-center">Spun Message: <span id="decoded-text">...</span></div>
+        </div>
+
+        <p id="result-message" class="text-center fw-bold mt-3"></p>
+      </div>
+    </div>
+
+    <!-- Add points display outside the game card -->
+    <div id="points-display-container" class="text-center mt-4 mb-3 d-none">
+      <div class="points-badge d-inline-flex align-items-center bg-dark text-white px-4 py-3 rounded-pill shadow">
+          <span class="text-warning fs-3 fw-bold" id="points-earned">0</span>
+          <span class="text-light ms-2">points earned!</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="next-challenge-container" class="text-center mt-4 d-none">
+      <a href="{{ url_for('challenge4') }}" class="btn btn-warning fw-bold">Next Challenge</a>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/challenge3.js') }}"></script>
+{% endblock %}

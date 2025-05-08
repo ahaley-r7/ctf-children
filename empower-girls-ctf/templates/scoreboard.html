@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% macro format_time(seconds) %}
+  {% set minutes = (seconds // 60)|int %}
+  {% set secs = (seconds % 60)|int %}
+  {{ minutes }}:{% if secs < 10 %}0{% endif %}{{ secs }}
+{% endmacro %}
+
+<div class="text-center mb-5">
+  <h1 class="empower-heading">Leaderboard</h1>
+  <p class="lead">🎉 Track your team’s success in the Empower Girls CTF powered by Rapid7!</p>
+</div>
+
+<div class="alert alert-info text-center">
+  Your team's score has been reset. Ready for another challenge? 🎉
+</div>
+
+<div class="row">
+  <!-- Team Leaderboard -->
+  <div class="col-md-6 mb-4">
+    <div class="card border-3 border-warning-subtle">
+      <div class="card-header text-white fw-bold" style="background-color: #000000;">
+        <img src="{{ url_for('static', filename='images/icon-team.png') }}" alt="Team Icon" style="height: 40px; margin-right: 10px;">
+        Team Leaderboard
+      </div>
+      <ul class="list-group list-group-flush">
+        {% for t in teams %}
+        <li class="list-group-item d-flex flex-column">
+          <div class="d-flex justify-content-between align-items-center">
+            <span>
+              <strong>{{ loop.index }}.</strong> {{ t.team_name }}
+              <small class="text-muted">({{ t.school_name }})</small>
+            </span>
+            <span class="badge bg-warning text-dark">{{ t.score }} pts</span>
+          </div>
+          {% if t.total_time is not none %}
+          <div class="text-muted small mt-1">Time: {{ format_time(t.total_time|round(0)) }}</div>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <!-- School Leaderboard -->
+  <div class="col-md-6 mb-4">
+    <div class="card border-3 border-warning-subtle">
+      <div class="card-header text-white fw-bold" style="background-color: #000000;">
+        <img src="{{ url_for('static', filename='images/icon-school.png') }}" alt="School Icon" style="height: 40px; margin-right: 10px;">
+        School Leaderboard
+      </div>
+      <ul class="list-group list-group-flush">
+        {% for school_name, total_score in schools %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <span>
+            <strong>{{ loop.index }}.</strong> {{ school_name }}
+          </span>
+          <span class="badge bg-success">{{ total_score }} pts</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="text-center mb-4">
+  <img src="{{ url_for('static', filename='images/girls-celebrate.png') }}"
+    alt="Empowered Girls Ready to Hack"
+    style="max-width: 100%; height: auto; margin-bottom: 1.5rem;">
+</div>
+
+<div class="text-center mt-4">
+  <form action="/finish" method="POST" class="d-inline">
+    <input type="hidden" name="next" value="home">
+    <button type="submit" class="btn btn-dark fw-bold" style="background-color: #000000; color: #FFD84D;">
+      <img src="{{ url_for('static', filename='images/rapid7-moose.png') }}" alt="Rapid7 Robot" style="height: 40px; margin-right: 10px;">
+      Register Another Team
+    </button>
+  </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}

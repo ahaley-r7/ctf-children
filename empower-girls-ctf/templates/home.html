@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row align-items-center">
+        <!-- Left Column: Logo and Title -->
+        <div class="col-md-4 text-center">
+            <img src="{{ url_for('static', filename='images/empower-girls-rapid7.png') }}" 
+                 alt="Empower Girls Logo" 
+                 style="max-width: 200px; height: auto; margin-bottom: 1.5rem;">
+            <h1 class="fw-bold" style="color: #FF6200;">Welcome to Empower Girls CTF!</h1>
+            <p class="lead">Join the challenge and learn how to stay safe online while having fun!</p>
+            <a href="{{ url_for('register') }}" class="btn btn-lg btn-submit fw-bold mt-3">
+                Let's Get Started 🚀
+            </a>
+        </div>
+        <!-- Right Column: Moose Intro -->
+        <div class="col-md-8 text-center">
+            <div class="card shadow-sm p-4 mb-4">
+                <h3 class="text-center mb-3" style="color: #FF6200;">Meet the Moose!</h3>
+                <p class="lead">
+                    Join the challenge and learn how to stay safe online while having fun with Rapid7's cybersecurity experts!
+                </p>
+                <div class="row align-items-center mb-4">
+                    <div class="col-md-7">
+                        <p>
+                            At Rapid7, we're not just cybersecurity experts—we're a team of creative problem solvers 
+                            who love making the digital world a safer place for everyone.
+                        </p>
+                        <p>
+                            Why a Moose, you ask? Because just like the word "moose" stays the same whether it's one 
+                            or a whole herd, we work together as one big, united team to tackle challenges and protect 
+                            the online world.
+                        </p>
+                    </div>
+                    <div class="col-md-5 text-center">
+                        <img src="{{ url_for('static', filename='images/rapid7-moose.png') }}" 
+                             alt="Rapid7 Moose" 
+                             class="img-fluid rounded" 
+                             style="max-height: 180px; animation: bounce 2s infinite;">
+                        <p class="small text-muted mt-2">The mighty Moose – our cybersecurity guide!</p>
+                    </div>
+                </div>
+                <div class="bg-light p-3 rounded mb-4">
+                    <h5 class="mb-3">What You'll Learn:</h5>
+                    <div class="row text-center g-3">
+                        <div class="col-md-3">
+                            <div class="card h-100 border-danger">
+                                <div class="card-body">
+                                    <h6 class="card-title">Spot Phishing</h6>
+                                    <p class="card-text small">Identify fake emails and messages designed to trick you</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card h-100 border-warning">
+                                <div class="card-body">
+                                    <h6 class="card-title">Website Security</h6>
+                                    <p class="card-text small">Find and fix vulnerabilities in websites</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card h-100 border-info">
+                                <div class="card-body">
+                                    <h6 class="card-title">Encryption</h6>
+                                    <p class="card-text small">Crack codes and understand data protection</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card h-100 border-primary">
+                                <div class="card-body">
+                                    <h6 class="card-title">Password Safety</h6>
+                                    <p class="card-text small">Create and manage strong passwords</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- Close card -->
+        </div> <!-- Close col-md-6 -->
+    </div> <!-- Close row -->
+</div> <!-- Close container -->
+{% endblock %}

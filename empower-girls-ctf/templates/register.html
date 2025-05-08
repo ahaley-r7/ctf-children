@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center mb-5">  
+  <h1 class="empower-heading">Get Ready to Play!</h1>
+  <p class="lead">Form your team, select your school, and join the <strong>Empower Girls CTF</strong> powered by Rapid7!</p>
+</div>
+
+<!-- Sponsor Shoutout Card -->
+<div class="card mb-4">
+  <div class="card-body text-center">
+    <img src="{{ url_for('static', filename='images/empower-girls-brand.png') }}" 
+         alt="Empower Girls Event Logo" 
+         style="max-width: 150px; height: auto; margin-bottom: 1rem;">
+    <p class="card-text">
+      A special thanks to our amazing sponsors for making this event possible!
+    </p>
+  </div>
+</div>
+
+<form method="POST" action="{{ url_for('register') }}">
+  <div class="mb-3 row">
+    <label for="team_name" class="col-sm-3 col-form-label fw-bold text-end">Team Name:</label>
+    <div class="col-sm-6">
+      <div class="input-group">
+        <input type="text" id="team_name" name="team_name" class="form-control" placeholder="e.g. CyberQueens" required>
+        <button type="button" class="btn btn-outline-secondary" onclick="generateName()">
+          Generate Fun Name
+        </button>
+      </div>
+      <small class="text-muted">Click to generate a random name if you need inspiration!</small>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label for="school_name" class="col-sm-3 col-form-label fw-bold text-end">School Name:</label>
+    <div class="col-sm-6">
+      <input type="text" id="school_name" name="school_name" class="form-control" placeholder="e.g. R7 Academy" required>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <button type="submit" class="btn btn-lg btn-submit fw-bold">
+      Start Your Challenges
+    </button>
+  </div>
+</form>
+
+<div class="text-center mb-4">
+  <!-- Cartoon Girl Hackers Celebrating Illustration -->
+  <img src="{{ url_for('static', filename='images/excited-girls.png') }}"
+       alt="Empowered Girls Getting Ready to Hack" 
+       style="max-width: 50%; height: auto; margin-bottom: 1.5rem;">
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}
