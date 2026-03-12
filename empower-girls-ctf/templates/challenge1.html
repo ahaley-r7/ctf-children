@@ -1,4 +1,8 @@
 {% extends "base.html" %}
+{% from 'partials/challenge_header.html' import challenge_header %}
+{% from 'partials/hint_card.html' import hint_card %}
+{% from 'partials/success_modal.html' import success_modal %}
+
 {% block content %}
 
 <!-- Wrap the intro in a div with id -->
@@ -8,62 +12,81 @@
 
 <!-- Add d-none class to hide initially -->
 <div class="challenge-content challenge1-content d-none">
-  <!-- Reminder banner -->
-  <div id="email-reminder" class="text-center mb-3 fw-bold" style="font-size:1.25rem; color:#FF6200;">
-    Remember: Watch for suspicious email addresses, spelling mistakes, urgent threats (“Do this NOW!”), and unexpected links or attachments.
-  </div>
+  <div class="container">
+    <!-- Challenge Header -->
+    {{ challenge_header('Challenge 1: Phishing Emails', 'Review each email carefully and decide if it\'s a phishing attempt or safe. Watch for suspicious email addresses, spelling mistakes, urgent threats, and unexpected links!', 'fa-envelope') }}
 
-  <!-- Email gallery display -->
-  <div id="email-gallery">
-    {% for email in emails %}
-    <div class="email-card card shadow-sm {% if not loop.first %}d-none{% endif %}" id="email{{ loop.index }}-card" data-correct="{{ 'phish' if email.is_phish else 'safe' }}">
-      <div class="card-body">
-        <h5 class="card-title">Email {{ loop.index }}</h5>
-        <div class="d-flex align-items-center gap-2 mb-2">
-          <img src="{{ url_for('static', filename=email.logo) }}" alt="Company Logo" class="me-2" style="height: 50px; max-height: 60px;">
-          <strong>{{ email.from }}</strong>
-        </div>
-        <p><strong>To:</strong> You<br>
-           <strong>Subject:</strong> {{ email.subject }}</p>
-        <p>{{ email.body | safe }}</p>
-        <p><em>— {{ email.signature }}</em></p>
-        <div class="mt-3 p-3 border rounded d-none" id="email{{ loop.index }}-explanation">
-          <h6 id="email{{ loop.index }}-result" class="fw-bold"></h6>
-          <div class="email-highlights">
-            <p>{{ email.explanation }}</p>
-            <p class="fw-bold {{ 'text-danger' if email.is_phish else 'text-success' }}">
-              This email is {{ 'Phishing' if email.is_phish else 'Safe' }}!
-            </p>
+    <!-- Email gallery display -->
+    <div id="email-gallery">
+      {% for email in emails %}
+      <div class="email-card card shadow-sm {% if not loop.first %}d-none{% endif %}" id="email{{ loop.index }}-card" data-correct="{{ 'phish' if email.is_phish else 'safe' }}">
+        <div class="card-body">
+          <h5 class="card-title">Email {{ loop.index }}</h5>
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <img src="{{ url_for('static', filename=email.logo) }}" alt="Company Logo" class="me-2 email-logo">
+            <strong>{{ email.from }}</strong>
+          </div>
+          <p><strong>To:</strong> You<br>
+             <strong>Subject:</strong> {{ email.subject | safe }}</p>
+          <p>{{ email.body | safe }}</p>
+          <p><em>— {{ email.signature }}</em></p>
+          <div class="mt-3 p-3 border rounded d-none" id="email{{ loop.index }}-explanation">
+            <h6 id="email{{ loop.index }}-result" class="fw-bold"></h6>
+            <div class="email-highlights">
+              <p>{{ email.explanation }}</p>
+              <p class="fw-bold {{ 'text-danger' if email.is_phish else 'text-success' }}">
+                This email is {{ 'Phishing' if email.is_phish else 'Safe' }}!
+              </p>
+            </div>
           </div>
         </div>
       </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-  </div>
 
-  <!-- Centered buttons below the email card -->
-  <div class="email-actions text-center mt-3">
-    <button class="btn btn-phish" onclick="checkEmail('phish')">PHISH</button>
-    <button class="btn btn-safe" onclick="checkEmail('safe')">SAFE</button>
-  </div>
+    <!-- Centered buttons below the email card -->
+    <div class="email-actions text-center mt-3">
+      <button class="btn btn-phish" onclick="checkEmail('phish')">PHISH</button>
+      <button class="btn btn-safe" onclick="checkEmail('safe')">SAFE</button>
+    </div>
 
-  <!-- Next Email Button -->
-  <div id="next-email-container" class="text-center mt-4" style="display: none;">
-    <button class="btn btn-next fw-bold" onclick="showNextEmail()">Next Email</button>
-  </div>
+    <!-- Next Email Button -->
+    <div id="next-email-container" class="text-center mt-4">
+      <button class="btn btn-next fw-bold" onclick="showNextEmail()">Next Email</button>
+    </div>
 
-  <!-- Show next challenge only when complete -->
-  <div id="next-challenge-container" style="display: none;" class="text-center mt-4">
-    <a href="{{ url_for('challenge2') }}" class="btn btn-next fw-bold">
-      Next Challenge
-    </a>
+    <!-- Show next challenge only when complete -->
+    <div id="next-challenge-container" class="text-center mt-4 d-none">
+      <a href="{{ url_for('challenge2') }}" class="btn btn-next fw-bold btn-lg px-4 py-2">
+        <i class="fas fa-arrow-right me-2"></i>Next Challenge
+      </a>
+    </div>
+    
+    <!-- Hint Card (hidden initially, shown when needed) -->
+    <div id="hint-section" class="mt-4 d-none">
+      {{ hint_card() }}
+    </div>
   </div>
 </div>
+
+<!-- Success Modal -->
+{% set what_learned %}
+<ul style="font-size: 1.1rem; line-height: 1.8;">
+  <li><strong>Phishing Detection:</strong> You learned to spot suspicious emails by checking sender addresses, looking for spelling errors, and identifying urgent threats.</li>
+  <li><strong>Email Security:</strong> Understanding how attackers use fake emails to steal information and credentials.</li>
+  <li><strong>Red Flags:</strong> Recognizing common phishing tactics like unexpected links, requests for personal information, and impersonation.</li>
+  <li><strong>Real-World Application:</strong> These skills protect you from real phishing attacks that target millions of people every day!</li>
+</ul>
+<p class="text-muted mb-0" style="font-size: 1.1rem; margin-top: 1rem;">You're now equipped to identify and avoid phishing scams!</p>
+{% endset %}
+{{ success_modal('challenge1-success-modal', 'Challenge 1: Phishing Emails', 'challenge1-points-earned', url_for('challenge2'), what_learned) }}
 
 {% endblock %}
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/utils/score-manager.js') }}"></script>
+<script src="{{ url_for('static', filename='js/utils/progress-manager.js') }}"></script>
 <script src="{{ url_for('static', filename='js/challenge1.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 {% endblock %}

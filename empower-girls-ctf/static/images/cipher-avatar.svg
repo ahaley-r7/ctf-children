@@ -1,0 +1,37 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="#667eea"/>
+  
+  <!-- Robot head -->
+  <rect x="60" y="60" width="80" height="70" rx="10" fill="#4a5568" stroke="#2d3748" stroke-width="3"/>
+  
+  <!-- Antenna -->
+  <line x1="100" y1="60" x2="100" y2="40" stroke="#2d3748" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="100" cy="35" r="8" fill="#48bb78"/>
+  
+  <!-- Eyes -->
+  <circle cx="80" cy="85" r="10" fill="#48bb78"/>
+  <circle cx="120" cy="85" r="10" fill="#48bb78"/>
+  
+  <!-- Eye highlights -->
+  <circle cx="82" cy="83" r="4" fill="#9ae6b4"/>
+  <circle cx="122" cy="83" r="4" fill="#9ae6b4"/>
+  
+  <!-- Mouth/display screen -->
+  <rect x="75" y="105" width="50" height="15" rx="3" fill="#2d3748"/>
+  <line x1="85" y1="112" x2="95" y2="112" stroke="#48bb78" stroke-width="2" stroke-linecap="round"/>
+  <line x1="105" y1="112" x2="115" y2="112" stroke="#48bb78" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Ears/side panels -->
+  <rect x="45" y="75" width="10" height="25" rx="3" fill="#4a5568" stroke="#2d3748" stroke-width="2"/>
+  <rect x="145" y="75" width="10" height="25" rx="3" fill="#4a5568" stroke="#2d3748" stroke-width="2"/>
+  
+  <!-- Decorative bolts -->
+  <circle cx="65" cy="65" r="3" fill="#cbd5e0"/>
+  <circle cx="135" cy="65" r="3" fill="#cbd5e0"/>
+  <circle cx="65" cy="125" r="3" fill="#cbd5e0"/>
+  <circle cx="135" cy="125" r="3" fill="#cbd5e0"/>
+  
+  <!-- Body hint -->
+  <rect x="75" y="130" width="50" height="20" rx="5" fill="#4a5568" opacity="0.6"/>
+</svg>

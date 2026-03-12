@@ -1,140 +1,230 @@
-{# templates/challenge3_intro.html #}
-<div class="container-fluid" style="background-color: #FF6200; padding: 3rem 1rem;">
-  <div class="d-flex align-items-center justify-content-center">
+{# templates/intros/challenge3_intro.html #}
+<div class="container-fluid" class="intro-header-orange">
+  <div class="d-flex align-items-center justify-content-centre">
     <img src="{{ url_for('static', filename='images/rapid7-moose.png') }}" 
          alt="Rapid7 Moose Mascot" 
-         style="height: 80px; margin-right: 20px;">
-    <h1 class="empower-heading text-white mb-0">Challenge 3: Encryption - Cracking the Cipher</h1>
+         class="intro-moose-icon">
+    <h1 class="empower-heading mb-0" style="color: #FF6200;">Challenge 3: Substitution Cipher Decoder</h1>
   </div>
 </div>
 
 <div class="container my-4">
-  <div class="row justify-content-center">
+  <div class="row justify-content-centre">
     <div class="col-lg-10">
       <div class="card shadow-sm p-4 mb-4">
-        <h3 class="text-center mb-3" style="color: #FF6200;">What is a Caesar Cipher?</h3>
+        <h3 class="text-centre mb-3" class="intro-section-title">What is a Substitution Cipher?</h3>
         
         <p class="lead">
-          Imagine writing secret messages that only your friends can decode! That's what encryption is all about.
+          Ready to become a real code breaker? Substitution ciphers are one of the most powerful encryption methods used throughout history!
         </p>
         
         <p>
-          The <strong>Caesar Cipher</strong> is one of the oldest tricks in cryptography. It's named after Julius Caesar, who used it to protect his military messages over 2,000 years ago!
+          Unlike the Caesar cipher (which just shifts letters), a <strong>substitution cipher</strong> replaces each letter with a completely different letter. Every letter in the alphabet gets its own unique replacement, making it much harder to crack!
         </p>
         
         <div class="bg-light p-3 rounded mb-4">
           <h5 class="mb-3">How It Works:</h5>
-          <p>Each letter in your message "shifts" a certain number of places in the alphabet.</p>
+          <p>Each letter maps to a different letter, but not in a simple pattern!</p>
           
-          <div class="row text-center">
-            <div class="col-12">
-              <div class="d-flex flex-wrap justify-content-center mb-2 alphabet-display" style="font-family: monospace; font-size: 1.2rem; letter-spacing: 0.1rem;">
-                <div class="me-1">A</div>
-                <div class="me-1">B</div>
-                <div class="me-1">C</div>
-                <div class="me-1">D</div>
-                <div class="me-1">E</div>
-                <div class="me-1">F</div>
-                <div class="me-1">G</div>
-                <div class="me-1">H</div>
-                <div class="me-1">I</div>
-                <div class="me-1">J</div>
-                <div class="me-1">K</div>
-                <div class="me-1">L</div>
-                <div class="me-1">M</div>
-                <div class="me-1">N</div>
-                <div class="me-1">O</div>
-                <div class="me-1">P</div>
-                <div class="me-1">Q</div>
-                <div class="me-1">R</div>
-                <div class="me-1">S</div>
-                <div class="me-1">T</div>
-                <div class="me-1">U</div>
-                <div class="me-1">V</div>
-                <div class="me-1">W</div>
-                <div class="me-1">X</div>
-                <div class="me-1">Y</div>
-                <div class="me-1">Z</div>
+          <div class="row text-centre mb-3">
+            <div class="col-md-6">
+              <div class="border rounded p-3 mb-2 bg-white">
+                <strong>Original Alphabet:</strong><br>
+                <span class="monospace-text">A B C D E F G H I J K L M</span>
               </div>
-              <div class="text-center mb-1">↓ Shift by 3 ↓</div>
-              <div class="d-flex flex-wrap justify-content-center alphabet-shifted" style="font-family: monospace; font-size: 1.2rem; letter-spacing: 0.1rem; color: #FF6200;">
-                <div class="me-1">D</div>
-                <div class="me-1">E</div>
-                <div class="me-1">F</div>
-                <div class="me-1">G</div>
-                <div class="me-1">H</div>
-                <div class="me-1">I</div>
-                <div class="me-1">J</div>
-                <div class="me-1">K</div>
-                <div class="me-1">L</div>
-                <div class="me-1">M</div>
-                <div class="me-1">N</div>
-                <div class="me-1">O</div>
-                <div class="me-1">P</div>
-                <div class="me-1">Q</div>
-                <div class="me-1">R</div>
-                <div class="me-1">S</div>
-                <div class="me-1">T</div>
-                <div class="me-1">U</div>
-                <div class="me-1">V</div>
-                <div class="me-1">W</div>
-                <div class="me-1">X</div>
-                <div class="me-1">Y</div>
-                <div class="me-1">Z</div>
-                <div class="me-1">A</div>
-                <div class="me-1">B</div>
-                <div class="me-1">C</div>
+            </div>
+            <div class="col-md-6">
+              <div class="border rounded p-3 mb-2" class="cipher-alphabet-bg">
+                <strong>Cipher Alphabet:</strong><br>
+                <span class="monospace-text encrypted-text-colour">Q W E R T Y U I O P A S D</span>
               </div>
             </div>
           </div>
           
           <div class="row mt-3">
             <div class="col-md-6">
-              <div class="border rounded p-2 text-center mb-2">
-                <strong>Original:</strong> MOOSE
+              <div class="border rounded p-2 text-centre mb-2">
+                <strong>Original:</strong> HELLO
               </div>
             </div>
             <div class="col-md-6">
-              <div class="border rounded p-2 text-center mb-2" style="color: #FF6200;">
-                <strong>Shifted (+3):</strong> PRRVH
+              <div class="border rounded p-2 text-centre mb-2" class="intro-section-title">
+                <strong>Encrypted:</strong> ITSSO
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-4">
+            <h6 class="mb-2"><strong>Interactive Example:</strong></h6>
+            <p class="small mb-2">Click on the red encrypted letters to map them to plain letters. Watch them turn green when correctly mapped!</p>
+            <div class="border rounded p-3 bg-white">
+              <div class="mb-2">
+                <strong>Encrypted Message:</strong><br>
+                <span class="demo-cipher-text">
+                  <span class="demo-letter demo-unmapped" data-plain="H" data-cipher="I">I</span>
+                  <span class="demo-letter demo-unmapped" data-plain="E" data-cipher="T">T</span>
+                  <span class="demo-letter demo-unmapped" data-plain="L" data-cipher="S">S</span>
+                  <span class="demo-letter demo-unmapped" data-plain="L" data-cipher="S">S</span>
+                  <span class="demo-letter demo-unmapped" data-plain="O" data-cipher="O">O</span>
+                </span>
+              </div>
+              <div class="small text-muted">
+                <em>Tip: Some letters will already be revealed when you start the challenge to help you get started!</em>
               </div>
             </div>
           </div>
         </div>
         
-        <h4 class="mt-4 mb-3 text-center" style="color: #FF6200;">How to Play</h4>
+        <style>
+          .demo-cipher-text {
+            font-size: 1.5rem;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 0.3rem;
+          }
+          
+          .demo-letter {
+            display: inline-block;
+            padding: 0.3rem 0.5rem;
+            margin: 0 0.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+          }
+          
+          .demo-unmapped {
+            background-color: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+            border: 2px solid #ff6b6b;
+          }
+          
+          .demo-unmapped:hover {
+            background-color: rgba(255, 193, 7, 0.3);
+            transform: scale(1.1);
+          }
+          
+          .demo-mapped {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+            border: 2px solid #28a745;
+            cursor: default;
+          }
+          
+          .demo-letter-mapping {
+            font-size: 0.7rem;
+            display: block;
+            margin-top: -0.2rem;
+          }
+        </style>
+        
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            const demoLetters = document.querySelectorAll('.demo-letter');
+            
+            demoLetters.forEach(letter => {
+              letter.addEventListener('click', function() {
+                if (this.classList.contains('demo-unmapped')) {
+                  const plainLetter = this.getAttribute('data-plain');
+                  
+                  // Add mapping display
+                  this.innerHTML = this.getAttribute('data-cipher') + 
+                    '<span class="demo-letter-mapping">→' + plainLetter + '</span>';
+                  
+                  // Change to mapped state
+                  this.classList.remove('demo-unmapped');
+                  this.classList.add('demo-mapped');
+                }
+              });
+            });
+          });
+        </script>
+        
+        <h4 class="mt-4 mb-3 text-centre" class="intro-section-title">Historical Secrets</h4>
+        
+        <div class="alert alert-info mb-4">
+          <div class="d-flex align-items-start">
+            <div class="me-3" class="crown-icon"><i class="fas fa-crown" class="crown-icon"></i></div>
+            <div>
+              <strong>Mary, Queen of Scots (1586)</strong><br>
+              Mary used substitution ciphers to send secret messages whilst imprisoned. Unfortunately for her, cryptanalysts cracked her code, revealing a plot against Queen Elizabeth I. This led to her execution! Substitution ciphers were serious business in history.
+            </div>
+          </div>
+        </div>
+        
+        <h4 class="mt-4 mb-3 text-centre" class="intro-section-title">Frequency Analysis: Your Secret Weapon</h4>
+        
+        <p>
+          How do you crack a substitution cipher? With <strong>frequency analysis</strong>! This is a real cryptography technique used by professional code breakers.
+        </p>
+        
+        <div class="bg-light p-3 rounded mb-4">
+          <p class="mb-2"><strong>The Secret:</strong> In English, some letters appear more often than others!</p>
+          <ul class="mb-0">
+            <li><strong>Most Common:</strong> E, T, A, O, I, N, S, H, R</li>
+            <li><strong>Least Common:</strong> Q, X, Z, J</li>
+            <li><strong>Common Words:</strong> THE, AND, FOR, ARE</li>
+          </ul>
+        </div>
+        
+        <h4 class="mt-4 mb-3 text-centre" class="intro-section-title">How to Play</h4>
         
         <div class="row mb-3">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="card h-100 border-success">
-              <div class="card-body">
-                <h5 class="card-title">Your Mission</h5>
-                <p class="card-text">Decode secret messages by finding the right shift value! Can you find the right number?.</p>
+              <div class="card-body text-centre">
+                <div class="crown-icon" class="mb-2"><i class="fas fa-search" class="icon-green"></i></div>
+                <h5 class="card-title">1. Analyse</h5>
+                <p class="card-text">Look at the frequency chart to see which letters appear most often.</p>
               </div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="card h-100 border-warning">
-              <div class="card-body">
-                <h5 class="card-title">Cybersecurity Skill</h5>
-                <p class="card-text">Understanding encryption helps you protect important information like passwords and personal data!</p>
+              <div class="card-body text-centre">
+                <div class="crown-icon" class="mb-2"><i class="fas fa-bullseye" class="icon-yellow"></i></div>
+                <h5 class="card-title">2. Decode</h5>
+                <p class="card-text">Click on encrypted letters and map them to plain letters. All instances update instantly!</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 border-info">
+              <div class="card-body text-centre">
+                <div class="crown-icon" class="mb-2"><i class="fas fa-trophy" class="icon-cyan"></i></div>
+                <h5 class="card-title">3. Solve</h5>
+                <p class="card-text">Use pattern recognition and logic to crack the code. Hints available if you need help!</p>
               </div>
             </div>
           </div>
         </div>
         
-        <div class="alert alert-info">
-          <div class="d-flex align-items-center">
-            <div class="me-3">💡</div>
+        <div class="alert alert-warning">
+          <div class="d-flex align-items-centre">
+            <div class="me-3"><i class="fas fa-lightbulb" class="intro-search-icon"></i></div>
             <div>
-              <strong>Tip:</strong> Look for common words that might appear in the message. Letters like 'E', 'T', and 'A' are the most common in English.
+              <strong>Scoring:</strong> You start with 5 points. Each hint you use costs 1 point. Can you solve it without hints?
+              <div class="mt-2">
+                <button class="btn btn-warning btn-lg fw-bold px-4 py-2" disabled style="opacity: 0.7; cursor: not-allowed;">
+                  <i class="fas fa-lightbulb me-2"></i>Get Hint (-1 point)
+                </button>
+                <p class="small text-muted mt-1 mb-0"><em>This is what the hint button looks like (it will be clickable on the challenge page)</em></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="alert alert-success">
+          <div class="d-flex align-items-centre">
+            <div class="me-3"><i class="fas fa-graduation-cap" class="intro-search-icon"></i></div>
+            <div>
+              <strong>What You'll Learn:</strong> Real cryptanalysis techniques, pattern recognition, logical deduction, and how encryption protects information in the real world!
             </div>
           </div>
         </div>
       </div>
       
-      <div class="text-center mt-4">
-        <button id="start-btn" class="btn btn-next fw-bold">Let's Decode!</button>
+      <div class="text-centre mt-4">
+        <button id="start-btn" class="btn btn-next fw-bold btn-lg">Let's Decode! <i class="fas fa-unlock"></i></button>
       </div>
     </div>
   </div>

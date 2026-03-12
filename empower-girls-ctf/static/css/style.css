@@ -44,11 +44,48 @@ body {
     cursor: pointer;
 }
 
-.btn-phish:hover {
-    background-color: #c82333;
-    box-shadow: 0 0 15px #dc3545, 0 0 20px rgba(220, 53, 69, 0.5);
+/* Button Hover Effects - Consolidated Glow Pattern */
+.btn-phish:hover,
+.btn-safe:hover,
+.btn-danger:hover,
+.btn-submit:hover,
+.btn-success:hover,
+#next-challenge-btn:hover,
+#continue-btn:hover,
+#submit-fixes:hover {
+    box-shadow: 0 0 15px currentColor, 0 0 20px currentColor;
     transform: translateY(-2px);
     transition: all 0.3s ease;
+}
+
+/* Specific background colors on hover */
+.btn-phish:hover {
+    background-color: #c82333;
+}
+
+.btn-safe:hover {
+    background-color: #218838;
+}
+
+.btn-danger:hover {
+    background-color: #bb2d3b;
+}
+
+.btn-submit:hover {
+    background-color: #1ca04a;
+}
+
+.btn-success:hover {
+    background-color: #157347;
+}
+
+#next-challenge-btn:hover {
+    background-color: #157347;
+}
+
+#continue-btn:hover,
+#submit-fixes:hover {
+    background-color: #e55800;
 }
 
 /* Big "SAFE" button - green */
@@ -62,22 +99,11 @@ body {
     cursor: pointer;
 }
 
-.btn-safe:hover {
-    background-color: #218838;
-    box-shadow: 0 0 15px #28a745, 0 0 20px rgba(40, 167, 69, 0.5);
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
-}
+/* Removed duplicate - using consolidated button hover effects above */
 
 /* Add glowing effect to red buttons */
 
-/* Danger buttons glow effect */
-.btn-danger:hover {
-    background-color: #bb2d3b;
-    box-shadow: 0 0 15px #dc3545, 0 0 20px rgba(220, 53, 69, 0.5);
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
-}
+/* Removed duplicate - using consolidated button hover effects above */
 
 /* For challenge specific red buttons */
 #reset-fixes:hover {
@@ -110,8 +136,9 @@ body {
     margin-top: 1rem;
 }
 
+/* Utility: Hidden state */
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .scanner-animation {
@@ -351,6 +378,26 @@ main {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 2rem;
     position: relative;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border-color: #FF6200;
+}
+
+.blog-meta {
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.blog-card h4 {
+    color: #333;
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
 }
 
 .blog-card img.icon {
@@ -398,6 +445,54 @@ p {
     border-radius: 0.5rem;
     border: 2px solid #ccc;
     margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-password:focus {
+    border-color: #FF6200;
+    box-shadow: 0 0 0 3px rgba(255, 98, 0, 0.1);
+    outline: none;
+}
+
+.input-password.error-pulse {
+    animation: errorPulse 0.5s;
+    border-color: #dc3545;
+}
+
+@keyframes errorPulse {
+    0%, 100% { border-color: #dc3545; }
+    50% { border-color: #ff6b6b; box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2); }
+}
+
+.login-form {
+    transition: all 0.3s ease;
+}
+
+.login-form.shake {
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.hidden-password-area {
+    cursor: text;
+    user-select: text;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.hidden-password-area:hover {
+    background-color: rgba(255, 98, 0, 0.03);
+}
+
+.hidden-password-area::selection {
+    background-color: #FF6200;
+    color: white;
 }
 
 .btn-submit {
@@ -408,13 +503,33 @@ p {
     border: none;
     border-radius: 0.75rem;
     cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.btn-submit:hover {
-    background-color: #1ca04a;
-    box-shadow: 0 0 15px #22c55e, 0 0 20px rgba(34, 197, 94, 0.5);
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
+.btn-submit::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-submit:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Removed duplicate - using consolidated button hover effects above */
+
+.btn-submit:active {
+    transform: translateY(0);
 }
 
 .feedback {
@@ -438,21 +553,6 @@ p {
     margin-right: 10px;
 }
 
-.btn-next {
-    background-color: #FF6200; /* Changed from #de8865 to Rapid7 orange */
-    color: white;
-    padding: 1rem 2rem;
-    font-size: 1.25rem;
-    border: none;
-    border-radius: 0.75rem;
-    text-decoration: none;
-    display: inline-block;
-    transition: background-color 0.3s ease;
-}
-
-.btn-next:hover {
-    background-color: #e55800; /* Changed from #ca7c38 to darker orange */
-}
 
 /* Layout: Center Website with Scanner on Right */
 .scanner-layout {
@@ -465,21 +565,44 @@ p {
     margin: 0 auto;
 }
 
-.browser-window {
-    flex: 0 0 850px;
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    border: 1px solid #ccc;
+/* Removed duplicate - using consolidated .browser-window above */
+
+/* Browser Chrome - Consolidated */
+.browser-chrome,
+.browser-bar {
+  background: linear-gradient(180deg, #f5f5f5 0%, #e8e8e8 100%);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #ccc;
 }
 
-.browser-bar {
-    background: #eee;
-    padding: 0.5rem 1rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+/* Browser Control Dots - Consolidated */
+.browser-bar .circle,
+.browser-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.browser-bar .circle.red,
+.browser-dot-red {
+    background-color: #ff5f56;
+    border: 1px solid #e0443e;
+}
+
+.browser-bar .circle.yellow,
+.browser-dot-yellow {
+    background-color: #ffbd2e;
+    border: 1px solid #dea123;
+}
+
+.browser-bar .circle.green,
+.browser-dot-green {
+    background-color: #27c93f;
+    border: 1px solid #1aab29;
 }
 
 .scanner-sidebar {
@@ -607,27 +730,8 @@ p {
 }
 
 /* Ensure the next challenge button isn't squished */
-#next-challenge-container .btn-next {
-    font-size: 1.2rem;
-    padding: 0.75rem 2rem;
-}
-
 #next-email-container {
     margin-top: 20px;
-}
-
-#next-email-container .btn-next {
-    background-color: #FF6200; /* Changed from #007bff to Rapid7 orange */
-    color: white;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#next-email-container .btn-next:hover {
-    background-color: #e55800; /* Changed from #0056b3 to darker orange */
 }
 
 .main-content {
@@ -790,136 +894,19 @@ footer {
     box-shadow: 0 0 8px #11ffa0;
 }
 
-/* Drag-and-drop text game zones */
-.droppable-vuln {
-    display: flex;
-    flex-direction: column;
-    min-height: 140px;
-    background: #fff;
-    border: 3px dashed #ef476f;
-    border-radius: 8px;
-    transition: all 0.2s;
-    padding: 1rem 1rem 0.5rem 1rem;
-    width: 180px;
-}
+/* Drag-and-drop text game zones - REMOVED (old challenge2 code) */
 
-/* Content area for the vulnerability */
-.droppable-vuln .vuln-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    text-align: center;
-}
-
-/* Expand vulnerability box when it has an item */
-.droppable-vuln.has-item {
-    min-height: 230px;
-    padding-bottom: 1rem;
-    border-color: #6c757d;
-    background-color: rgba(108, 117, 125, 0.05);
-}
-
-/* Position the fix at the bottom but with clear separation */
-.droppable-vuln .draggable-fix {
-    margin-top: auto;
-    margin-bottom: 0;
-    width: 90%;
-    align-self: center;
-}
-
-.droppable-vuln img {
-    max-height: 80px;
-    width: auto;
-    margin-bottom: 0.5rem;
-}
-
-/* Add a neutral style for slots with items */
-.has-item {
-  border: 2px solid #6c757d;
-  background-color: rgba(108, 117, 125, 0.05);
-}
-
-/* Fix zone styling */
-#fix-zone {
-    max-height: none !important;
-    overflow-y: visible !important;
-    border: none;
-    background: transparent;
-}
-
-.draggable-fix {
-    cursor: grab;
-    margin-bottom: 0.5rem;
-    color: #FF6200 !important;
-    transition: all 0.2s;
-    background-color: white;
-    border: 1px solid rgba(0,0,0,0.125);
-}
-
-.draggable-fix:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-}
-
-/* Game area layout for small screens */
-@media (max-height: 800px) {
-    .droppable-vuln {
-        height: 120px;
-        min-height: 100px;
-    }
-    
-    #fix-zone {
-        max-height: 280px;
-    }
-    
-    #game-area h3 {
-        font-size: 1.4rem;
-        margin-bottom: 0.5rem;
-    }
-}
-
-/* Attempts counter */
-#attempts-display {
-    background-color: #f8f9fa;
-    border-radius: 0.25rem;
-    padding: 0.5rem;
-    margin: 0.5rem 0;
-}
-
-#attempts-display .badge {
-    font-size: 1rem;
-}
-
-/* Rapid7 themed buttons */
-#continue-btn, #submit-fixes {
+/* Rapid7 Orange Buttons - Consolidated */
+#continue-btn,
+#submit-fixes {
     background-color: #FF6200;
     color: white;
     transition: all 0.3s;
 }
 
-#continue-btn:hover, #submit-fixes:hover {
-    background-color: #e55800;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
+/* Removed duplicate - using consolidated button hover effects above */
 
-/* For any other success buttons */
-.btn-success:hover {
-    background-color: #157347;
-    box-shadow: 0 0 12px #198754, 0 0 18px rgba(25, 135, 84, 0.5);
-    transform: translateY(-1px);
-    transition: all 0.2s ease;
-}
-
-/* Next challenge button (specific to challenge completion) */
-#next-challenge-btn:hover {
-    background-color: #157347;
-    box-shadow: 0 0 15px #198754, 0 0 25px rgba(25, 135, 84, 0.6);
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
-}
+/* Removed duplicate - using consolidated button hover effects above */
 /* Base challenge content styling */
 .challenge-content {
     display: none;
@@ -954,33 +941,6 @@ footer {
 
 .challenge4-content:not(.d-none) {
     display: block !important;
-}
-
-/* Challenge 2 Enhanced Game Layout */
-#vuln-fix-wrapper {
-  position: relative;
-  min-height: 350px;
-}
-
-/* Vertical divider between vulnerabilities and fixes */
-#vuln-fix-wrapper::after {
-  content: '';
-  position: absolute;
-  top: 10%;
-  bottom: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-left: 2px dashed #6c757d;
-  opacity: 0.5;
-  z-index: 1;
-}
-
-/* Enhanced styling for Secure WackyHacky title */
-#game-area h3.text-primary {
-  color: #FF6200 !important;
-  font-size: 1.6rem !important;
-  font-weight: bold;
-  margin-bottom: 1rem;
 }
 
 /* Larger submit/reset buttons */
@@ -1074,15 +1034,36 @@ footer {
 
 .attempt-circle {
   display: inline-block;
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  background-color: #FF6200;
-  margin: 0 2px;
+  background: linear-gradient(135deg, #FF6200 0%, #ff8533 100%);
+  margin: 0 3px;
+  box-shadow: 0 2px 4px rgba(255, 98, 0, 0.3);
+  transition: all 0.3s ease;
 }
 
 .attempt-circle.used {
-  background-color: #e0e0e0;
+  background: #e0e0e0;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: scale(0.8);
+}
+
+.attempts-counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #fff5f0 0%, #ffffff 100%);
+  border-radius: 8px;
+  border: 2px solid #FF6200;
+}
+
+.attempts-label {
+  font-weight: bold;
+  color: #FF6200;
+  font-size: 0.95rem;
 }
 
 /* Add these styles for the letter spinning animation */
@@ -1106,4 +1087,3135 @@ footer {
 /* Terminal card needs perspective as well */
 .terminal-card {
   perspective: 1000px;
+}
+
+
+/* ============================================================================
+   CHALLENGE 3: RETRO MONITOR AND KEYBOARD STYLES
+   ============================================================================ */
+
+/* Monitor Bezel */
+.retro-monitor-bezel {
+  background: linear-gradient(145deg, #e8e4d9 0%, #d4cfc0 100%);
+  border: 20px solid #c9c4b5;
+  border-radius: 25px;
+  padding: 40px;
+  box-shadow: 
+    inset 0 2px 10px rgba(255, 255, 255, 0.5),
+    inset 0 -2px 10px rgba(0, 0, 0, 0.2),
+    0 20px 60px rgba(0, 0, 0, 0.4);
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Monitor Brand Label */
+.monitor-brand-label {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Arial', sans-serif;
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+/* CRT Screen */
+.retro-crt-screen {
+  background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+  border: 4px solid #1a1a1a;
+  border-radius: 15px;
+  padding: 30px;
+  margin-bottom: 75px;
+  box-shadow: 
+    inset 0 0 80px rgba(0, 255, 100, 0.08),
+    inset 0 0 20px rgba(0, 0, 0, 0.8);
+  position: relative;
+  overflow: hidden;
+  min-height: 300px;
+}
+
+/* Scanlines Effect */
+.crt-scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Screen Glow */
+.crt-screen-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(0, 255, 100, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Screen Reflection */
+.crt-reflection {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 30%;
+  height: 20%;
+  background: radial-gradient(ellipse at top left, rgba(255, 255, 255, 0.03) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 8;
+  border-radius: 50%;
+}
+
+/* Cipher Display */
+.cipher-display {
+  font-size: 1.5rem;
+  line-height: 2.5rem;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.1rem;
+  color: #00ff00;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+  position: relative;
+  z-index: 15;
+  min-height: 200px;
+}
+
+/* Cipher Letters */
+.cipher-letter {
+  display: inline-block;
+  min-width: 30px;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+  color: #ff6b6b;
+  text-shadow: 0 0 8px rgba(255, 107, 107, 0.8);
+}
+
+.cipher-letter.mapped {
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.cipher-letter:hover {
+  background-color: rgba(255, 193, 7, 0.3) !important;
+  transform: scale(1.1);
+}
+
+/* Bottom Control Panel */
+.monitor-bottom-panel {
+  position: absolute;
+  bottom: 8px;
+  left: 15px;
+  right: 15px;
+  height: 60px;
+  background: linear-gradient(180deg, #d4cfc0 0%, #c0bbb0 100%);
+  border-top: 3px solid #a0a0a0;
+  border-bottom: 2px solid #e8e4d9;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 15px;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Disk Drives */
+.disk-drive {
+  background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+  border: 2px solid #333;
+  border-radius: 4px;
+  position: relative;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.floppy-drive {
+  width: 75px;
+  height: 35px;
+}
+
+.cd-drive {
+  width: 85px;
+  height: 35px;
+}
+
+/* LED Indicators */
+.led-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #333;
+}
+
+.led-power {
+  background: #4a4;
+  box-shadow: 0 0 10px #4a4;
+}
+
+.led-activity {
+  background: #fa4;
+  box-shadow: 0 0 8px #fa4;
+  animation: blink 2s infinite;
+}
+
+/* Control Buttons */
+.monitor-control-btn {
+  border-radius: 50%;
+  background: linear-gradient(145deg, #666, #444);
+  border: 2px solid #333;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.power-button {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(145deg, #555, #333);
+  border: 3px solid #222;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.power-symbol {
+  font-size: 24px;
+  color: #4a4;
+  font-weight: bold;
+  text-shadow: 0 0 8px #4a4;
+}
+
+/* Divider Lines */
+.control-divider {
+  width: 2px;
+  height: 45px;
+  background: linear-gradient(180deg, #999 0%, #777 50%, #999 100%);
+  border-radius: 1px;
+}
+
+/* QWERTY Keyboard */
+.qwerty-keyboard {
+  background: linear-gradient(145deg, #e8e4d9 0%, #d4cfc0 100%);
+  border: 12px solid #c9c4b5;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 
+    inset 0 2px 8px rgba(255, 255, 255, 0.4),
+    inset 0 -2px 8px rgba(0, 0, 0, 0.2),
+    0 10px 30px rgba(0, 0, 0, 0.3);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.keyboard-title {
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Letter Keys */
+.letter-key {
+  width: 60px;
+  height: 55px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  background: linear-gradient(180deg, #f5f5f5 0%, #d0d0d0 100%);
+  border: 3px solid #999;
+  border-bottom: 5px solid #666;
+  border-radius: 6px;
+  color: #333;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  box-shadow: 
+    0 4px 0 #888,
+    0 6px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.1s;
+  cursor: pointer;
+}
+
+.letter-key:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #888, 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-bottom: 2px solid #666;
+}
+
+.letter-key:disabled {
+  background: linear-gradient(180deg, #b0b0b0 0%, #909090 100%);
+  border: 3px solid #777;
+  border-bottom: 3px solid #555;
+  color: #555;
+  text-shadow: none;
+  box-shadow: 0 2px 0 #666;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.letter-key.selected {
+  background: linear-gradient(180deg, #90ee90 0%, #60c060 100%);
+  color: #004400;
+  border-color: #50a050;
+}
+
+/* Decorative Keys */
+.decorative-key {
+  height: 55px;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  background: linear-gradient(180deg, #b0b0b0 0%, #909090 100%);
+  border: 3px solid #777;
+  border-bottom: 4px solid #555;
+  border-radius: 6px;
+  color: #555;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 3px 0 #666,
+    0 5px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Mapping Badges */
+.mapping-badge {
+  font-family: monospace;
+  font-size: 1rem;
+  background: rgba(255, 193, 7, 0.2);
+  border: 2px solid #ffc107;
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
+/* Success Panel */
+.challenge3-success-panel {
+  padding: 3rem;
+  margin: 2rem auto;
+  max-width: 800px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+}
+
+.success-points-display {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(40, 167, 69, 0.3);
+}
+
+.success-learnings {
+  background: #f8f9fa;
+  padding: 2rem;
+  border-radius: 10px;
+  margin-top: 1.5rem;
+}
+
+
+/* Additional Challenge 3 Component Styles */
+
+/* Control Panel Sections */
+.control-section-left,
+.control-section-center,
+.control-section-right {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Disk Drive Components */
+.floppy-slot {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 55px;
+  height: 3px;
+  background: #444;
+  border-radius: 1px;
+}
+
+.drive-label {
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  font-size: 9px;
+  color: #888;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.cd-slot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 65px;
+  height: 2px;
+  background: #444;
+}
+
+.cd-button {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  background: #555;
+  border-radius: 2px;
+  border: 1px solid #333;
+}
+
+/* LED Containers */
+.led-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.led-label {
+  font-size: 8px;
+  color: #666;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+/* Ports */
+.ports-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.usb-port {
+  width: 18px;
+  height: 12px;
+  background: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 2px;
+  position: relative;
+}
+
+.usb-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 8px;
+  color: #555;
+}
+
+.audio-jack {
+  width: 12px;
+  height: 12px;
+  background: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 50%;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Control Buttons Specific Sizes */
+.brightness-btn,
+.contrast-btn,
+.menu-btn {
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+}
+
+/* Cipher Word Spacing */
+.cipher-word {
+  display: inline-block;
+  margin-right: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Letter States */
+.cipher-letter.selected {
+  background-color: rgba(255, 193, 7, 0.4);
+  border: 2px solid #ffc107;
+}
+
+.cipher-letter.hint-revealed {
+  background-color: rgba(0, 123, 255, 0.2);
+}
+
+.cipher-letter.correct {
+  background-color: rgba(40, 167, 69, 0.2);
+}
+
+.cipher-letter.incorrect {
+  background-color: rgba(255, 193, 7, 0.1);
+}
+
+/* Cipher letter colors */
+.cipher-letter .encrypted-text {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+}
+
+.cipher-letter .plain-text {
+  font-weight: bold;
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.cipher-letter .plain-text.hint-color {
+  color: #007bff;
+}
+
+.cipher-letter .plain-text.correct-color {
+  color: #28a745;
+}
+
+.cipher-letter .plain-text.incorrect-color {
+  color: #ffc107;
+}
+
+/* Punctuation in cipher */
+.cipher-punctuation {
+  color: #00ff00;
+}
+
+/* Keyboard highlighting */
+.letter-key.highlighted {
+  box-shadow: 0 4px 0 #888, 0 6px 10px rgba(0, 0, 0, 0.3), 0 0 0 3px #ffc107;
+}
+
+/* Mapping badge colors */
+.mapping-badge.hint-revealed {
+  background: rgba(0, 123, 255, 0.2);
+  border: 2px solid #007bff;
+}
+
+.mapping-badge.hint-revealed .plain-letter {
+  color: #007bff;
+}
+
+.mapping-badge.correct {
+  background: rgba(40, 167, 69, 0.2);
+  border: 2px solid #28a745;
+}
+
+.mapping-badge.correct .plain-letter {
+  color: #28a745;
+}
+
+.mapping-badge.incorrect {
+  background: rgba(255, 193, 7, 0.2);
+  border: 2px solid #ffc107;
+}
+
+.mapping-badge.incorrect .plain-letter {
+  color: #ffc107;
+}
+
+.mapping-badge .encrypted-letter {
+  color: #ff6b6b;
+}
+
+
+
+/* Decorative key small text */
+.decorative-key.small-text {
+  font-size: 0.9rem;
+}
+
+/* Theme colors */
+.scenario-banner {
+  background: #FF6200;
+  border: 2px solid #FF6200;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+#decoder-container {
+  background: linear-gradient(180deg, #FF6200dd 0%, #FF620099 100%);
+  border: 2px solid #FF6200;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 0 30px #FF620066;
+}
+
+
+/* ============================================================================
+   CHALLENGE 2: MODERN E-COMMERCE WEBSITE STYLES
+   ============================================================================ */
+
+/* Scanner cursor with crosshair effect - ONLY for vulnerability selection area */
+#fake-site-wrapper,
+#fake-site-wrapper *,
+#fake-site-wrapper a,
+#fake-site-wrapper button,
+#fake-site-wrapper input {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="none" stroke="%23FF6200" stroke-width="2" opacity="0.4"/><circle cx="16" cy="16" r="10" fill="none" stroke="%23FF6200" stroke-width="2" opacity="0.6"/><circle cx="16" cy="16" r="4" fill="%23FF6200"/><line x1="16" y1="8" x2="16" y2="24" stroke="%23FF6200" stroke-width="1.5"/><line x1="8" y1="16" x2="24" y2="16" stroke="%23FF6200" stroke-width="1.5"/></svg>') 16 16, crosshair !important;
+}
+
+/* Pulsing glow effect around the fake site wrapper */
+#fake-site-wrapper {
+  position: relative;
+  animation: scanner-pulse 2s ease-in-out infinite;
+}
+
+@keyframes scanner-pulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(255, 98, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 98, 0, 0.6), 0 0 40px rgba(255, 98, 0, 0.3);
+  }
+}
+
+/* Browser Window */
+/* Browser Window - Consolidated */
+.browser-window {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Removed duplicate - using consolidated .browser-chrome above */
+
+.browser-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Removed duplicate - using consolidated browser dots above */
+
+.browser-nav-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.browser-nav-btn {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 14px;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.browser-url-bar {
+  flex: 1;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-family: 'Courier New', monospace;
+}
+
+.url-lock {
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.url-lock-broken {
+  color: #FF6B6B;
+}
+
+.url-lock-broken i {
+  font-size: 18px;
+}
+
+.url-not-secure {
+  color: #FF6B6B;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.url-text {
+  color: #333;
+}
+
+/* Website Content */
+.website-content {
+  background: #fff;
+  min-height: 600px;
+}
+
+/* Navigation */
+.site-nav {
+  background: #4A90E2;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.site-logo img {
+  height: 40px;
+}
+
+/* Override filter for wackyhacky logo specifically */
+.site-logo .wackyhacky-logo {
+  filter: none;
+  height: 60px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+  flex: 1;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.nav-links a:hover {
+  opacity: 0.8;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-cart {
+  background: #fff;
+  color: #4A90E2;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-cart:hover {
+  transform: translateY(-2px);
+}
+
+/* Search Section */
+.search-section {
+  padding: 24px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.search-bar-container {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  gap: 8px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Courier New', monospace;
+  color: #FF6200;
+}
+
+.search-btn {
+  background: #4A90E2;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.search-btn:hover {
+  background: #3a7bc8;
+}
+
+/* Products Section */
+.products-section {
+  padding: 32px 24px;
+}
+
+.section-title {
+  color: #333;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.product-card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  margin-bottom: 16px;
+}
+
+/* Make appspider-can image smaller */
+img[alt="AppSpider in a Can"] {
+  height: 140px;
+  object-fit: contain;
+}
+
+.product-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.product-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: #4A90E2;
+  margin-bottom: 16px;
+}
+
+.btn-add-cart {
+  background: #FFB84D;
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;
+}
+
+.btn-add-cart:hover {
+  background: #f5a935;
+}
+
+/* Reviews Section */
+.reviews-section {
+  padding: 32px 24px;
+  background: #f8f9fa;
+}
+
+.review-card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.review-author {
+  font-weight: 600;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.review-rating {
+  color: #FFB84D;
+}
+
+.review-rating i {
+  margin-right: 2px;
+}
+
+.review-text {
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+  font-family: 'Courier New', monospace;
+}
+
+/* Login Section */
+.login-section {
+  padding: 32px 24px;
+}
+
+.login-form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login-input {
+  padding: 12px 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.password-field-container {
+  position: relative;
+}
+
+.password-strength {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.strength-bar {
+  height: 8px;
+  border-radius: 4px;
+  flex: 1;
+}
+
+.strength-very-weak {
+  background: linear-gradient(90deg, #FF6B6B 0%, #FF6B6B 20%, #e0e0e0 20%, #e0e0e0 100%);
+}
+
+.strength-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: #FF6B6B;
+}
+
+.btn-login {
+  background: #4A90E2;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-login:hover {
+  background: #3a7bc8;
+}
+
+/* Footer */
+.site-footer {
+  background: #2c3e50;
+  color: #fff;
+  padding: 32px 24px 16px;
+  margin-top: 32px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto 24px;
+}
+
+.footer-section h4 {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.footer-section p {
+  color: #bdc3c7;
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+.footer-debug {
+  text-align: center;
+  padding-top: 16px;
+  border-top: 1px solid #34495e;
+  font-family: 'Courier New', monospace;
+}
+
+/* Vulnerable Area Highlighting (for scanner interaction) */
+[data-vulnerable] {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+[data-vulnerable].scanner-highlight {
+  outline: 3px solid #FF6200;
+  outline-offset: 2px;
+  animation: pulse-vulnerable 1.5s infinite;
+}
+
+/* Severity-based color coding for vulnerabilities */
+[data-vulnerable].scanner-highlight.severity-critical {
+  outline: 3px solid #FF6B6B;
+  animation: pulse-critical 1.5s infinite;
+}
+
+[data-vulnerable].scanner-highlight.severity-medium {
+  outline: 3px solid #FFB84D;
+  animation: pulse-medium 1.5s infinite;
+}
+
+[data-vulnerable].scanner-highlight.severity-low {
+  outline: 3px solid #FFD93D;
+  animation: pulse-low 1.5s infinite;
+}
+
+/* Severity badge styling */
+.severity-badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: bold;
+  color: white;
+  z-index: 1001;
+  pointer-events: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.severity-badge[data-severity="critical"] {
+  background-color: #FF6B6B;
+}
+
+.severity-badge[data-severity="medium"] {
+  background-color: #FFB84D;
+}
+
+.severity-badge[data-severity="low"] {
+  background-color: #FFD93D;
+  color: #333;
+}
+
+[data-vulnerable].vulnerability-discovered {
+  box-shadow: 0 0 0 4px #28a745;
+  border-radius: 8px;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Vulnerability attempted but answered incorrectly (red) */
+[data-vulnerable].vulnerability-attempted {
+  box-shadow: 0 0 0 4px #dc3545;
+  border-radius: 8px;
+  opacity: 0.7;
+  pointer-events: none;
+  cursor: not-allowed !important;
+}
+
+@keyframes pulse-vulnerable {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 98, 0, 0.7), 0 0 10px rgba(255, 98, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(255, 98, 0, 0), 0 0 20px rgba(255, 98, 0, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 98, 0, 0), 0 0 10px rgba(255, 98, 0, 0.5);
+  }
+}
+
+@keyframes pulse-critical {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7), 0 0 10px rgba(255, 107, 107, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(255, 107, 107, 0), 0 0 20px rgba(255, 107, 107, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 107, 107, 0), 0 0 10px rgba(255, 107, 107, 0.5);
+  }
+}
+
+@keyframes pulse-medium {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 184, 77, 0.7), 0 0 10px rgba(255, 184, 77, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(255, 184, 77, 0), 0 0 20px rgba(255, 184, 77, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 184, 77, 0), 0 0 10px rgba(255, 184, 77, 0.5);
+  }
+}
+
+@keyframes pulse-low {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 217, 61, 0.7), 0 0 10px rgba(255, 217, 61, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(255, 217, 61, 0), 0 0 20px rgba(255, 217, 61, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 217, 61, 0), 0 0 10px rgba(255, 217, 61, 0.5);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .site-nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .nav-links {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .browser-chrome {
+    flex-wrap: wrap;
+  }
+  
+  .browser-url-bar {
+    width: 100%;
+    order: 3;
+  }
+}
+
+/* ============================================================================
+   INTERACTIVE SECURITY SCANNER - DRAGGABLE SCANNER ELEMENT
+   ============================================================================ */
+
+/* Scanner Magnifier Element - Icon-based Design */
+.scanner-magnifier {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  cursor: grab;
+  z-index: 1000;
+  filter: drop-shadow(0 4px 12px rgba(255, 98, 0, 0.4));
+  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Initially positioned in center - will be set by JS */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Pulsing ring around scanner */
+.scanner-magnifier::before {
+  content: '';
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border: 3px solid rgba(255, 98, 0, 0.6);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: scanner-ring-pulse 2s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes scanner-ring-pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0;
+  }
+}
+
+.scanner-magnifier:active {
+  cursor: grabbing;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Scanner Icon (Font Awesome magnifying glass) */
+.scanner-icon {
+  font-size: 120px;
+  color: #FF6200;
+  filter: drop-shadow(0 2px 6px rgba(255, 98, 0, 0.5));
+  transition: all 0.2s ease;
+}
+
+/* AppSpider Logo Overlay */
+.scanner-logo-overlay {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  bottom: 10px;
+  right: 10px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  pointer-events: none;
+}
+
+/* Hover effect for scanner */
+.scanner-magnifier:hover .scanner-icon {
+  color: #ff7a33;
+  filter: drop-shadow(0 4px 12px rgba(255, 98, 0, 0.8));
+  transform: scale(1.05);
+}
+
+/* Pulse animation when scanner is active */
+.scanner-magnifier.scanning {
+  animation: scanner-pulse 1.5s infinite;
+}
+
+@keyframes scanner-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 4px 12px rgba(255, 98, 0, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 4px 20px rgba(255, 98, 0, 0.6));
+  }
+}
+
+/* Scan Trail Effect */
+.scan-trail {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 98, 0, 0.4) 0%, rgba(255, 98, 0, 0) 70%);
+  pointer-events: none;
+  z-index: 999;
+  /* CSS transition for opacity fade (fallback) */
+  transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+  /* CSS animation for smooth fade-out effect */
+  animation: trail-fade 1.5s ease-out forwards;
+}
+
+@keyframes trail-fade {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+}
+
+/* Ensure scanner is above website content but below modals */
+#fake-site-wrapper {
+  position: relative;
+}
+
+/* Responsive adjustments for scanner */
+@media (max-width: 768px) {
+  .scanner-magnifier {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .scanner-icon {
+    font-size: 90px;
+  }
+  
+  .scanner-logo-overlay {
+    width: 40px;
+    height: 40px;
+  }
+    width: 65px;
+    height: 65px;
+  }
+  
+  .scanner-logo {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .scanner-handle {
+    height: 40px;
+    bottom: -28px;
+  }
+}
+
+/* ============================================================================
+   MODAL STYLES - CONSOLIDATED BASE CLASSES
+   Shared modal structure for lesson, question, and feedback modals
+   ============================================================================ */
+
+/* Base Modal Container */
+.modal,
+.lesson-modal,
+.question-modal,
+.feedback-modal {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: modal-fade-in 0.3s ease-out;
+}
+
+@keyframes modal-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Base Modal Overlay */
+.modal-overlay,
+.lesson-modal-overlay,
+.question-modal-overlay,
+.feedback-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: -1;
+}
+
+/* Base Modal Content Box */
+.modal-content,
+.lesson-modal-content,
+.question-modal-content,
+.feedback-modal-content {
+  position: relative;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 10001;
+  animation: modal-slide-up 0.3s ease-out;
+  margin: 20px auto;
+}
+
+/* Question modal slightly larger */
+.question-modal-content {
+  max-width: 700px;
+  max-height: 85vh;
+}
+
+@keyframes modal-slide-up {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Base Modal Header */
+.modal-header,
+.lesson-modal-header,
+.question-modal-header,
+.feedback-modal-header {
+  padding: 30px 30px 20px;
+  border-bottom: 2px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+/* Question modal header has gradient background */
+.question-modal-header {
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  border-radius: 12px 12px 0 0;
+}
+
+/* Feedback modal header centered */
+.feedback-modal-header {
+  padding: 40px 30px 20px;
+  justify-content: center;
+  border-bottom: none;
+}
+
+/* Base Modal Body */
+.modal-body,
+.lesson-modal-body,
+.question-modal-body,
+.feedback-modal-body {
+  padding: 30px;
+}
+
+/* Feedback modal body centered */
+.feedback-modal-body {
+  padding: 20px 30px 30px;
+  text-align: center;
+}
+
+/* Base Modal Footer */
+.modal-footer,
+.lesson-modal-footer,
+.feedback-modal-footer {
+  padding: 20px 30px 30px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.lesson-modal-footer {
+  justify-content: flex-end;
+}
+
+/* ============================================================================
+   MINI-LESSON MODAL - Specific Styles
+   ============================================================================ */
+
+/* Close Button */
+.lesson-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  color: #999;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  z-index: 10002;
+}
+
+.lesson-modal-close:hover {
+  background-color: #f0f0f0;
+  color: #333;
+  transform: rotate(90deg);
+}
+
+.lesson-modal-close:focus {
+  outline: 2px solid #4A90E2;
+  outline-offset: 2px;
+}
+
+/* Modal Header */
+.lesson-modal-header {
+  padding: 30px 30px 20px;
+  border-bottom: 2px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+/* Modal Title - Base */
+.modal-title,
+.lesson-modal-title,
+.question-modal-title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #333;
+  font-family: 'Montserrat', sans-serif;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.lesson-modal-title i {
+  margin-right: 10px;
+}
+
+/* Question modal title is white */
+.question-modal-title {
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+
+/* Severity Badge */
+.lesson-severity-badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lesson-severity-badge.critical {
+  background-color: #FF6B6B;
+  color: #ffffff;
+}
+
+.lesson-severity-badge.medium {
+  background-color: #FFB84D;
+  color: #ffffff;
+}
+
+.lesson-severity-badge.low {
+  background-color: #FFE66D;
+  color: #333333;
+}
+
+/* Modal Body */
+.lesson-modal-body {
+  padding: 30px;
+}
+
+.lesson-content {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #555;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Modal Footer */
+.lesson-modal-footer {
+  padding: 20px 30px 30px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Modal Continue/Action Buttons - Consolidated */
+.modal-continue-btn,
+.lesson-continue-btn,
+.feedback-continue-btn {
+  background-color: #4A90E2;
+  color: #ffffff;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.modal-continue-btn:hover,
+.lesson-continue-btn:hover {
+  background-color: #3a7bc8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+.modal-continue-btn:active,
+.lesson-continue-btn:active {
+  transform: translateY(0);
+}
+
+.modal-continue-btn:focus,
+.lesson-continue-btn:focus {
+  outline: 2px solid #4A90E2;
+  outline-offset: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .lesson-modal-content {
+    width: 95%;
+    max-height: 90vh;
+  }
+  
+  .lesson-modal-header {
+    padding: 20px 20px 15px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .lesson-modal-title {
+    font-size: 1.4rem;
+  }
+  
+  .lesson-modal-body {
+    padding: 20px;
+  }
+  
+  .lesson-content {
+    font-size: 1rem;
+  }
+  
+  .lesson-modal-footer {
+    padding: 15px 20px 20px;
+  }
+  
+  .lesson-continue-btn {
+    width: 100%;
+  }
+}
+
+/* Accessibility: Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .lesson-modal,
+  .lesson-modal-content {
+    animation: none;
+  }
+  
+  .lesson-modal-close:hover {
+    transform: none;
+  }
+  
+  .lesson-continue-btn:hover {
+    transform: none;
+  }
+}
+
+/* ===================================
+   Question Modal - Specific Styles
+   =================================== */
+
+/* Removed duplicate modal container, overlay, content - using consolidated base classes above */
+
+/* Question Number Badge */
+.question-number-badge {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  white-space: nowrap;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Removed duplicate - using consolidated modal body above */
+
+.question-text {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #333;
+  margin: 0 0 25px 0;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Answer Choices Container */
+.answer-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Answer Choice Button */
+.answer-choice-btn {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  padding: 16px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.answer-choice-btn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background-color: #4A90E2;
+  transform: scaleY(0);
+  transition: transform 0.2s ease;
+}
+
+.answer-choice-btn:hover {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  border-color: #4A90E2;
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.2);
+}
+
+.answer-choice-btn:hover::before {
+  transform: scaleY(1);
+}
+
+.answer-choice-btn:active {
+  transform: translateX(3px);
+}
+
+.answer-choice-btn:focus {
+  outline: 3px solid #4A90E2;
+  outline-offset: 2px;
+}
+
+.answer-choice-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+.answer-choice-btn:disabled:hover {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-color: #dee2e6;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Selected Answer State */
+.answer-choice-btn.selected {
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  border-color: #2c5aa0;
+  color: #ffffff;
+  transform: translateX(5px);
+}
+
+.answer-choice-btn.selected::before {
+  transform: scaleY(1);
+  background-color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .question-modal-content {
+    width: 95%;
+    max-height: 90vh;
+  }
+  
+  .question-modal-header {
+    padding: 20px 20px 15px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .question-modal-title {
+    font-size: 1.3rem;
+  }
+  
+  .question-modal-body {
+    padding: 20px;
+  }
+  
+  .question-text {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+  
+  .answer-choice-btn {
+    padding: 14px 16px;
+    font-size: 0.95rem;
+  }
+}
+
+/* Accessibility: Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .question-modal,
+  .question-modal-content {
+    animation: none;
+  }
+  
+  .answer-choice-btn:hover {
+    transform: none;
+  }
+  
+  .answer-choice-btn::before {
+    transition: none;
+  }
+}
+
+
+/* ============================================================================
+   FEEDBACK MODAL - Specific Styles
+   Styles for correct/incorrect answer feedback display
+   ============================================================================ */
+
+/* Removed duplicate modal container, overlay, content - using consolidated base classes above */
+
+/* Feedback Icon Container */
+.feedback-icon {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  animation: icon-pop 0.5s ease-out;
+  margin: 0 auto;
+}
+
+.feedback-icon > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes icon-pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Correct Answer Icon (Green Checkmark) */
+.feedback-modal-content.correct .feedback-icon {
+  background-color: #d4edda;
+  color: #28a745;
+  border: 4px solid #28a745;
+}
+
+/* Incorrect Answer Icon (Red X) */
+.feedback-modal-content.incorrect .feedback-icon {
+  background-color: #f8d7da;
+  color: #dc3545;
+  border: 4px solid #dc3545;
+}
+
+/* Removed duplicate - using consolidated modal body above */
+
+/* Feedback Message (Main heading) */
+.feedback-message {
+  margin: 0 0 20px 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #333;
+}
+
+/* Correct Answer Message Color */
+.feedback-modal-content.correct .feedback-message {
+  color: #28a745;
+}
+
+/* Incorrect Answer Message Color */
+.feedback-modal-content.incorrect .feedback-message {
+  color: #dc3545;
+}
+
+/* Feedback Explanation Text */
+.feedback-explanation {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Removed duplicate - using consolidated modal footer above */
+
+/* Feedback Continue Button - Specific Colors */
+.feedback-continue-btn {
+  padding: 12px 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Correct Answer Continue Button (Green) */
+.feedback-modal-content.correct .feedback-continue-btn {
+  background-color: #28a745;
+  color: #ffffff;
+}
+
+.feedback-modal-content.correct .feedback-continue-btn:hover {
+  background-color: #218838;
+  box-shadow: 0 0 15px #28a745, 0 0 20px rgba(40, 167, 69, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Incorrect Answer Continue Button (Red) */
+.feedback-modal-content.incorrect .feedback-continue-btn {
+  background-color: #dc3545;
+  color: #ffffff;
+}
+
+.feedback-modal-content.incorrect .feedback-continue-btn:hover {
+  background-color: #c82333;
+  box-shadow: 0 0 15px #dc3545, 0 0 20px rgba(220, 53, 69, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .feedback-modal-content {
+    width: 95%;
+    max-height: 90vh;
+  }
+  
+  .feedback-modal-header {
+    padding: 30px 20px 15px;
+  }
+  
+  .feedback-icon {
+    width: 80px;
+    height: 80px;
+    font-size: 48px;
+  }
+  
+  .feedback-modal-body {
+    padding: 15px 20px 20px;
+  }
+  
+  .feedback-message {
+    font-size: 1.4rem;
+  }
+  
+  .feedback-explanation {
+    font-size: 1rem;
+  }
+  
+  .feedback-modal-footer {
+    padding: 15px 20px 20px;
+  }
+  
+  .feedback-continue-btn {
+    padding: 10px 30px;
+    font-size: 1rem;
+  }
+}
+
+/* Accessibility: Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .feedback-modal,
+  .feedback-modal-content,
+  .feedback-icon {
+    animation: none;
+  }
+  
+  .feedback-continue-btn:hover {
+    transform: none;
+  }
+}
+
+/* Additional Animation Effects for Incorrect Answers */
+/* Screen Shake Effect */
+@keyframes screen-shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+  20%, 40%, 60%, 80% { transform: translateX(10px); }
+}
+
+.feedback-modal-content.incorrect.shake {
+  animation: screen-shake 0.5s ease-in-out, modal-slide-up 0.3s ease-out;
+}
+
+/* Red Flash Overlay */
+@keyframes red-flash {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.3; }
+}
+
+.feedback-modal-overlay.red-flash {
+  background-color: rgba(220, 53, 69, 0.8);
+  animation: red-flash 0.6s ease-in-out;
+}
+
+/* Glitch Text Effect for "HACKED!" */
+@keyframes glitch {
+  0% {
+    text-shadow: 2px 2px #ff0000, -2px -2px #00ff00;
+    transform: translate(0);
+  }
+  25% {
+    text-shadow: -2px 2px #ff0000, 2px -2px #00ff00;
+    transform: translate(-2px, 2px);
+  }
+  50% {
+    text-shadow: 2px -2px #ff0000, -2px 2px #00ff00;
+    transform: translate(2px, -2px);
+  }
+  75% {
+    text-shadow: -2px -2px #ff0000, 2px 2px #00ff00;
+    transform: translate(-2px, -2px);
+  }
+  100% {
+    text-shadow: 2px 2px #ff0000, -2px -2px #00ff00;
+    transform: translate(0);
+  }
+}
+
+@keyframes glitch-before {
+  0%, 100% {
+    clip-path: inset(40% 0 61% 0);
+    transform: translate(-2px, -2px);
+  }
+  20% {
+    clip-path: inset(92% 0 1% 0);
+    transform: translate(2px, 2px);
+  }
+  40% {
+    clip-path: inset(43% 0 1% 0);
+    transform: translate(-2px, 2px);
+  }
+  60% {
+    clip-path: inset(25% 0 58% 0);
+    transform: translate(2px, -2px);
+  }
+  80% {
+    clip-path: inset(54% 0 7% 0);
+    transform: translate(-2px, -2px);
+  }
+}
+
+@keyframes glitch-after {
+  0%, 100% {
+    clip-path: inset(58% 0 20% 0);
+    transform: translate(2px, 2px);
+  }
+  20% {
+    clip-path: inset(10% 0 85% 0);
+    transform: translate(-2px, -2px);
+  }
+  40% {
+    clip-path: inset(80% 0 5% 0);
+    transform: translate(2px, -2px);
+  }
+  60% {
+    clip-path: inset(15% 0 70% 0);
+    transform: translate(-2px, 2px);
+  }
+  80% {
+    clip-path: inset(65% 0 15% 0);
+    transform: translate(2px, 2px);
+  }
+}
+
+.feedback-message.glitch {
+  position: relative;
+  animation: glitch 0.3s ease-in-out 3;
+}
+
+/* Glitch pseudo-elements for enhanced effect */
+.feedback-message.glitch::before,
+.feedback-message.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.feedback-message.glitch::before {
+  color: #ff0000;
+  animation: glitch-before 0.3s ease-in-out 3;
+  z-index: -1;
+}
+
+.feedback-message.glitch::after {
+  color: #00ff00;
+  animation: glitch-after 0.3s ease-in-out 3;
+  z-index: -2;
+}
+
+/* ============================================================================
+   SCORE DISPLAY - Interactive Security Scanner Challenge
+   ============================================================================ */
+
+/* Score Display Container */
+.score-display {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  z-index: 9000;
+  transition: all 0.3s ease;
+}
+
+.score-display:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.score-display .score-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.score-display .score-value {
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1;
+  transition: all 0.3s ease;
+}
+
+.score-display .score-max {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Score update animation */
+.score-value.score-updated {
+  animation: score-pulse 0.5s ease;
+}
+
+@keyframes score-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+    color: #FFB84D;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Challenge Completion Screen */
+.challenge-completion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: 2rem;
+}
+
+.completion-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  padding: 3rem;
+  text-align: center;
+  max-width: 500px;
+  animation: completion-slide-up 0.5s ease-out;
+}
+
+@keyframes completion-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.completion-card h2 {
+  color: #4A90E2;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.completion-card .final-score {
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  margin: 2rem 0;
+}
+
+.completion-card .final-score .score-label {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+}
+
+.completion-card .final-score .score-value-large {
+  font-size: 4rem;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.completion-card .final-score .score-max {
+  font-size: 1.2rem;
+  opacity: 0.8;
+  margin-top: 0.5rem;
+}
+
+.completion-card .completion-message {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 1.5rem 0;
+}
+
+/* Responsive adjustments for score display */
+@media (max-width: 768px) {
+  .score-display {
+    top: 10px;
+    right: 10px;
+    padding: 8px 16px;
+  }
+  
+  .score-display .score-value {
+    font-size: 1.5rem;
+  }
+  
+  .completion-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .completion-card h2 {
+    font-size: 1.5rem;
+  }
+  
+  .completion-card .final-score .score-value-large {
+    font-size: 3rem;
+  }
+}
+
+
+/* ============================================================================
+   EXTRACTED INLINE STYLES - Moved from HTML templates
+   ============================================================================ */
+
+/* Challenge 1 - Email reminder banner */
+.email-reminder {
+  font-size: 1.25rem;
+  color: #FF6200;
+}
+
+/* Challenge 1 - Email logo sizing */
+.email-logo {
+  height: 50px;
+  max-height: 60px;
+}
+
+/* Challenge 1 - Next email container */
+#next-email-container {
+  display: none;
+}
+
+/* Challenge 1 - Next challenge container */
+#next-challenge-container {
+  display: none;
+}
+
+/* Register page - Brand logo */
+.register-brand-logo {
+  max-width: 150px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+/* Register page - Excited girls image */
+.register-excited-girls {
+  max-width: 50%;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+/* Scoreboard - Trophy icon color */
+.trophy-icon {
+  color: #ffc107;
+}
+
+/* Scoreboard - Card header styling */
+.scoreboard-card-header {
+  background-color: #000000;
+}
+
+/* Scoreboard - Team/School icon */
+.scoreboard-icon {
+  height: 40px;
+  margin-right: 10px;
+}
+
+/* Scoreboard - Girls celebrate image */
+.scoreboard-celebrate-img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+/* Scoreboard - Finish button */
+.btn-finish {
+  background-color: #000000;
+  color: #FFD84D;
+}
+
+/* Scoreboard - Rapid7 moose icon */
+.rapid7-moose-icon {
+  height: 40px;
+  margin-right: 10px;
+}
+
+/* Challenge 2 - AppSpider icon */
+.appspider-icon {
+  height: 120px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Challenge 2 - Title color */
+.challenge2-title {
+  color: #FF6200;
+  font-size: 1.5rem;
+}
+
+/* Challenge 2 - Robot scan animation */
+.robot-scan-img {
+  max-width: 700px;
+}
+
+/* Challenge 2 - WackyHacky logo */
+.wackyhacky-logo {
+  height: 60px;
+}
+
+/* Challenge 2 - Footer debug text */
+.footer-debug small {
+  color: #999;
+}
+
+/* Challenge 2 - Modal initial state */
+#lesson-modal,
+#question-modal,
+#feedback-modal {
+  display: none;
+}
+
+/* Challenge 2 intro - Orange background header */
+.intro-header-orange {
+  background-color: #FF6200;
+  padding: 3rem 1rem;
+}
+
+/* Challenge 2 intro - Rapid7 moose in header */
+.intro-moose-icon {
+  height: 80px;
+  margin-right: 20px;
+}
+
+/* Challenge 2 intro - Section title */
+.intro-section-title {
+  color: #FF6200;
+}
+
+/* Challenge 2 intro - AppSpider image */
+.appspider-intro-img {
+  max-height: 180px;
+}
+
+/* Challenge 2 intro - Search icon */
+.intro-search-icon {
+  font-size: 1.5rem;
+  color: #17a2b8;
+}
+
+/* Challenge 3 intro - Monospace text */
+.monospace-text {
+  font-family: monospace;
+  font-size: 1.1rem;
+}
+
+/* Challenge 3 intro - Cipher alphabet background */
+.cipher-alphabet-bg {
+  background-color: #fff3cd;
+}
+
+/* Challenge 3 intro - Encrypted text color */
+.encrypted-text-color {
+  color: #FF6200;
+}
+
+/* Challenge 3 intro - Crown icon */
+.crown-icon {
+  font-size: 2rem;
+  color: #ffd700;
+}
+
+/* Challenge 4 intro - Terminal background */
+.intro-terminal-bg {
+  background-color: #000000;
+  padding: 3rem 1rem;
+}
+
+/* Challenge 4 intro - Terminal text */
+.intro-terminal-text {
+  color: #00ff88;
+}
+
+/* Challenge 4 intro - Cipher avatar */
+.cipher-avatar-img {
+  max-height: 150px;
+}
+
+/* Challenge 5 intro - AI Guardian background */
+.intro-ai-bg {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 3rem 1rem;
+}
+
+/* Challenge 5 intro - Robot icon */
+.intro-robot-icon {
+  height: 80px;
+  margin-right: 20px;
+}
+
+/* Challenge 5 intro - Level card */
+.level-card-intro {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+/* Home page - Empower Girls event image */
+.empower-event-img {
+  max-width: 80%;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+/* Home page - Challenge card hover */
+.challenge-card-home {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.challenge-card-home:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Scan button glow effect */
+.scan-btn-glow {
+  box-shadow: 0 0 10px #ffc107;
+  animation: glow-pulse 1.5s infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 10px #ffc107;
+  }
+  50% {
+    box-shadow: 0 0 20px #ffc107, 0 0 30px #ffc107;
+  }
+}
+
+/* Hint Button - Consolidated */
+#hint-btn,
+.btn-hint {
+  min-width: 200px;
+  background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+  border: none;
+  color: #000;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 0.75rem 2rem;
+  transition: all 0.3s ease;
+}
+
+#hint-btn:hover,
+.btn-hint:hover {
+  background: linear-gradient(135deg, #138496 0%, #117a8b 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(23, 162, 184, 0.4);
+  color: #000;
+}
+
+/* Hint message styling */
+#hint-message {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-left: 4px solid #17a2b8;
+}
+
+/* Hint pulse animation for vulnerable areas */
+@keyframes hint-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 193, 7, 0);
+  }
+  50% {
+    box-shadow: 0 0 20px 10px rgba(255, 193, 7, 0.6);
+  }
+}
+
+
+/* Footer debug text color */
+.footer-debug-text {
+  color: #999;
+}
+
+
+/* Additional extracted inline styles */
+
+/* Home page - Empower Girls logo */
+.home-logo {
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+/* Home page - Title color */
+.home-title {
+  color: #FF6200;
+}
+
+/* Home page - Moose image */
+.home-moose-img {
+  max-height: 180px;
+  animation: bounce 2s infinite;
+}
+
+/* Base template - Navbar */
+.navbar {
+  background-color: #212529 !important;
+  padding: 0.5rem 1rem;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+}
+
+/* Base template - Rapid7 logo */
+.rapid7-logo {
+  height: 60px;
+  margin-right: 15px;
+}
+
+/* Base template - Empower Girls icon */
+.empower-icon {
+  height: 45px;
+  width: auto;
+}
+
+/* Base template - Transparent button for finish */
+.btn-transparent {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.btn-transparent:hover .empower-icon {
+  opacity: 0.8;
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+}
+
+/* Base template - Team icon */
+.team-icon-large {
+  height: 120px;
+  width: auto;
+}
+
+/* Base template - Score label */
+.score-label-text {
+  font-size: 1.2rem;
+  color: #6c757d;
+}
+
+/* Base template - Team score display */
+.team-score-display {
+  color: #FF6200;
+}
+
+/* Base template - Footer brand logo */
+.footer-brand-logo {
+  height: 80px;
+  margin-bottom: 10px;
+}
+
+/* Base template - Transparent button */
+.btn-transparent {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* Challenge 1 intro - Phish/Safe text colors */
+.text-phish {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.text-safe {
+  color: #28a745;
+  font-weight: bold;
+}
+
+/* Challenge 4 - Container max width */
+.challenge4-container {
+  max-width: 95%;
+  width: 1200px;
+}
+
+/* Challenge 4 - Title */
+.challenge4-title {
+  font-size: 1.5rem;
+}
+
+/* Challenge 4 - Subtitle */
+.challenge4-subtitle {
+  font-size: 0.9rem;
+}
+
+/* Challenge 4 - Blog title */
+.blog-title {
+  color: #333;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* Challenge 5 - Typing indicator */
+#typing-indicator {
+  display: none;
+}
+
+/* Challenge 5 - Hint display */
+#hint-display {
+  display: none;
+}
+
+/* Challenge 5 - AI instructions text */
+.ai-instructions-text {
+  font-family: monospace;
+  color: #667eea;
+}
+
+/* Challenge 5 - Icon colors */
+.icon-blue {
+  color: #007bff;
+}
+
+.icon-green {
+  color: #28a745;
+}
+
+.icon-yellow {
+  color: #ffc107;
+}
+
+.icon-cyan {
+  color: #17a2b8;
+}
+
+.icon-red {
+  color: #dc3545;
+}
+
+/* Challenge 5 - Large icon */
+.icon-large {
+  font-size: 3rem;
+}
+
+
+/* ============================================================================
+   BUTTON CONSISTENCY - Standardized button styles across all challenges
+   ============================================================================ */
+
+/* Primary action buttons - "Start" buttons in intros */
+#start-btn {
+  font-size: 1.1rem;
+  padding: 0.75rem 2rem;
+  background-color: #FF6200;
+  color: white;
+  border: none;
+}
+
+#start-btn:hover {
+  background-color: #E55800;
+  color: white;
+}
+
+/* Next challenge buttons - consistent across all challenges */
+.btn-next {
+  font-size: 1.1rem;
+  padding: 0.75rem 2rem;
+  background-color: #FF6200;
+  color: white;
+  border: none;
+}
+
+.btn-next:hover {
+  background-color: #E55800;
+  color: white;
+}
+
+/* Removed duplicate - using consolidated submit button above */
+
+/* Removed duplicate - using consolidated hint button above */
+
+/* Removed duplicate - using consolidated next button above */
+
+/* Modal buttons - consistent sizing */
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  justify-content: center;
+}
+
+.modal-buttons .btn {
+  padding: 0.5rem 1.5rem;
+}
+
+/* Challenge-specific button consistency */
+.btn-phish,
+.btn-safe {
+  min-width: 120px;
+  font-size: 1.1rem;
+  padding: 0.75rem 1.5rem;
+}
+
+/* ============================================================================
+   LAYOUT CONSISTENCY - Standardized containers and spacing
+   ============================================================================ */
+
+/* Challenge content wrapper - consistent max-width */
+.challenge-content .container,
+.challenge-content .container-fluid {
+  max-width: 1400px;
+}
+
+/* Intro card consistent styling */
+#intro-card {
+  margin-bottom: 0;
+}
+
+#intro-card .h1,
+#intro-card h1 {
+  color: #FF6200;
+}
+
+#intro-card h3,
+#intro-card h4,
+#intro-card h5,
+.intro-section-title {
+  color: #333;
+}
+
+/* Intro card images - consistent sizing */
+#intro-card img.img-fluid {
+  max-width: 300px;
+  height: auto;
+}
+
+#intro-card .intro-moose-icon {
+  max-width: 80px;
+  height: auto;
+  margin-right: 1rem;
+}
+
+/* Challenge title consistency */
+.challenge-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Scenario banner consistency */
+.scenario-banner {
+  border-radius: 15px;
+}
+
+.scenario-banner h3 {
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.scenario-banner p {
+  color: white;
+  margin-bottom: 0;
+}
+
+.story-section {
+  background: rgba(0, 0, 0, 0.2);
+  border-left: 4px solid white;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.story-section p {
+  color: white;
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.story-section strong {
+  color: white;
+}
+
+/* Card consistency */
+.challenge-content .card {
+  border: none;
+  border-radius: 15px;
+}
+
+/* Ensure hint cards stay below modals */
+#hint-card-container,
+#hint-section {
+  position: relative;
+  z-index: 1 !important;
+}
+
+/* When modals are open, ensure hint cards are definitely below */
+.lesson-modal ~ #hint-card-container,
+.question-modal ~ #hint-card-container,
+.feedback-modal ~ #hint-card-container,
+body:has(.lesson-modal) #hint-card-container,
+body:has(.question-modal) #hint-card-container,
+body:has(.feedback-modal) #hint-card-container {
+  z-index: 1 !important;
+}
+
+/* Icon sizing consistency */
+.scenario-icon img {
+  height: 60px;
+  width: auto;
+}
+
+.locked-icon {
+  height: 30px;
+}
+
+/* Text color consistency for instructions */
+.instruction-text-red {
+  color: #ff6b6b;
+}
+
+.instruction-text-blue {
+  color: #007bff;
+}
+
+.instruction-text-green {
+  color: #28a745;
+}
+
+.instruction-text-yellow {
+  color: #ffc107;
+}
+
+/* Challenge 4 specific - form max width */
+.challenge4-content .login-form {
+  max-width: 550px;
+}
+
+/* Challenge 4 - blog logo */
+.blog-logo {
+  max-width: 100%;
+  height: auto;
+  max-height: 150px;
+}
+
+/* Custom Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1050;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #1a1a1a;
+  margin: 10% auto;
+  padding: 0;
+  border: 1px solid #444;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+.modal-header {
+  padding: 15px 20px;
+  border-bottom: 1px solid #444;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #fff;
+}
+
+.modal-header .close {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  line-height: 1;
+}
+
+.modal-header .close:hover,
+.modal-header .close:focus {
+  color: #fff;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.modal-footer {
+  padding: 15px 20px;
+  border-top: 1px solid #444;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal-footer .btn {
+  margin: 0;
+}
+
+/* Challenge Header Styling - Consistent across all challenges */
+.challenge-header {
+  padding: 2rem;
+  background: linear-gradient(135deg, #fff5f0 0%, #ffffff 100%);
+  border-radius: 15px;
+  border: 2px solid #FF6200;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.challenge-header h2 {
+  color: #FF6200;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.challenge-header .lead {
+  color: #333;
+  font-size: 1.1rem;
+}
+
+/* Hint Card Styling - Consistent across all challenges */
+.hint-content {
+  min-height: 50px;
+}
+
+.hint-content .alert {
+  margin-bottom: 0;
+}
+
+.btn-hint {
+  background-color: #ffc107 !important;
+  border-color: #ffc107 !important;
+  color: #000 !important;
+  transition: all 0.3s ease;
+}
+
+.btn-hint:hover {
+  background-color: #ffb300 !important;
+  border-color: #ffb300 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
+}
+
+.btn-hint:disabled {
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+  color: #fff !important;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Fix Bootstrap modal z-index stacking */
+.modal {
+  z-index: 1055 !important;
+}
+
+.modal-backdrop {
+  z-index: 1050 !important;
+}
+
+.modal-dialog {
+  z-index: 1056 !important;
+}
+
+/* Ensure modal content is clickable */
+.modal-content {
+  position: relative;
+  z-index: 1057 !important;
+  pointer-events: auto;
+}
+
+/* Fix modal backdrop blocking clicks */
+.modal.show {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.show .modal-dialog {
+  margin: 0 auto;
+}
+
+/* Bootstrap Modal Styling for Challenge 5 */
+.modal .modal-content {
+  background-color: #ffffff;
+  color: #333;
+  border-radius: 8px;
+  border: 2px solid #FF6200;
+}
+
+.modal .modal-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  padding: 1rem 1.5rem;
+}
+
+.modal .modal-title {
+  color: white;
+  font-weight: bold;
+  margin: 0;
+}
+
+.modal .modal-body {
+  padding: 1.5rem;
+  background-color: #ffffff;
+  color: #333;
+}
+
+.modal .modal-body p {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.modal .modal-body input {
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  color: #333;
+}
+
+.modal .modal-body input:focus {
+  background-color: #ffffff;
+  border-color: #667eea;
+  color: #333;
+}
+
+.modal .modal-footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  border-radius: 0 0 6px 6px;
+  padding: 1rem 1.5rem;
+}
+
+.modal .btn-close {
+  filter: brightness(0) invert(1);
+}
+
+/* Ensure text is visible in modals */
+.modal label,
+.modal span {
+  color: #333;
+}
+
+/* Colored card titles match border colors */
+.card.border-danger .card-title {
+  color: #dc3545;
+}
+
+.card.border-warning {
+  border-color: #9b59b6 !important;
+  border-width: 2px !important;
+}
+
+.card.border-warning .card-title {
+  color: #9b59b6;
+  font-weight: 600;
+}
+
+.card.border-info .card-title {
+  color: #0dcaf0;
+}
+
+.card.border-primary .card-title {
+  color: #0d6efd;
+}
+
+.card.border-success .card-title {
+  color: #28a745;
 }

@@ -1,23 +1,23 @@
-<div class="container-fluid" style="background-color: #FF6200; padding: 3rem 1rem;">
-  <div class="d-flex align-items-center justify-content-center">
+<div class="container-fluid" class="intro-header-orange">
+  <div class="d-flex align-items-centre justify-content-centre">
     <img src="{{ url_for('static', filename='images/rapid7-moose.png') }}"
          alt="Rapid7 Moose Mascot"
-         style="height: 80px; margin-right: 20px;">
-    <h1 class="empower-heading text-white mb-0">Challenge 2: Scan and Secure Websites</h1>
+         class="intro-moose-icon">
+    <h1 class="empower-heading mb-0" style="color: #FF6200;">Challenge 2: Scan and Secure Websites</h1>
   </div>
 </div>
 
 <div class="container my-4">
-  <div class="row justify-content-center">
+  <div class="row justify-content-centre">
     <div class="col-lg-10">
       <div class="card shadow-sm p-4 mb-4"">
-        <h3 class="text-center mb-3" style="color: #FF6200;">Web Security Heroes</h3>
+        <h3 class="text-centre mb-3" class="intro-section-title">Web Security Heroes</h3>
         
         <p class="lead">
           Did you know websites can have hidden weaknesses that hackers look for? At Rapid7, we find and fix these problems before the bad guys can!
         </p>
         
-        <div class="row align-items-center mb-4">
+        <div class="row align-items-centre mb-4">
           <div class="col-md-7">
             <p>
               Our superhero scanner called <strong>AppSpider</strong> crawls through websites like a digital detective, searching for security problems that could let hackers in.
@@ -26,18 +26,17 @@
               Just like how you lock your home's doors and windows, websites need protection too. When AppSpider finds a vulnerability, our security experts help fix it right away!
             </p>
           </div>
-          <div class="col-md-5 text-center">
+          <div class="col-md-5 text-centre">
             <img src="{{ url_for('static', filename='images/appspider-can.png') }}" 
                  alt="AppSpider Robot Scanner" 
-                 class="img-fluid rounded" 
-                 style="max-height: 180px;">
+                 class="img-fluid rounded appspider-intro-img">
             <p class="small text-muted mt-2">AppSpider: Rapid7's web security scanner</p>
           </div>
         </div>
         
         <div class="bg-light p-3 rounded mb-4">
           <h5 class="mb-3">Common Website Vulnerabilities:</h5>
-          <div class="row text-center g-3">
+          <div class="row text-centre g-3">
             <div class="col-md-4">
               <div class="card h-100 border-danger">
                 <div class="card-body">
@@ -65,7 +64,7 @@
           </div>
         </div>
         
-        <h4 class="mt-4 mb-3 text-center" style="color: #FF6200;">How to Play</h4>
+        <h4 class="mt-4 mb-3 text-centre" class="intro-section-title">How to Play</h4>
         
         <div class="row mb-3">
           <div class="col-md-6">
@@ -87,17 +86,32 @@
         </div>
         
         <div class="alert alert-info">
-          <div class="d-flex align-items-center">
-            <div class="me-3">🔎</div>
+          <div class="d-flex align-items-centre">
+            <div class="me-3"><i class="fas fa-search" class="intro-search-icon"></i></div>
             <div>
               <strong>Security Tip:</strong> Always check that a website uses HTTPS (look for the padlock icon) before entering any personal information!
             </div>
           </div>
         </div>
+        
+        <div class="alert alert-warning">
+          <div class="d-flex align-items-centre">
+            <div class="me-3"><i class="fas fa-lightbulb" class="intro-search-icon"></i></div>
+            <div>
+              <strong>Need Help?</strong> If you get stuck, look for the hint button on the challenge page. Each hint costs 1 point!
+              <div class="mt-2">
+                <button class="btn btn-warning btn-lg fw-bold px-4 py-2" disabled style="opacity: 0.7; cursor: not-allowed;">
+                  <i class="fas fa-lightbulb me-2"></i>Get Hint (-1 point)
+                </button>
+                <p class="small text-muted mt-1 mb-0"><em>This is what the hint button looks like (it will be clickable on the challenge page)</em></p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       
-      <div class="text-center mt-4">
-        <button id="start-btn" class="btn btn-next fw-bold">Launch AppSpider Mission! 🕸️</button>
+      <div class="text-centre mt-4">
+        <button id="start-btn" class="btn btn-next fw-bold btn-lg">Launch AppSpider Mission! <i class="fas fa-spider"></i></button>
       </div>
     </div>
   </div>

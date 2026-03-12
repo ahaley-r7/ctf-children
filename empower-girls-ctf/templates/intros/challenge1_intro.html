@@ -1,24 +1,24 @@
-<div class="container-fluid" style="background-color: #FF6200; padding: 3rem 1rem;">
-  <div class="d-flex align-items-center justify-content-center">
+<div class="container-fluid" class="intro-header-orange">
+  <div class="d-flex align-items-centre justify-content-centre">
     <img src="{{ url_for('static', filename='images/rapid7-moose.png') }}"
          alt="Rapid7 Moose Mascot"
-         style="height: 80px; margin-right: 20px;">
-    <h1 class="empower-heading text-white mb-0">Challenge 1: Spot the Phish</h1>
+         class="intro-moose-icon">
+    <h1 class="empower-heading mb-0" style="color: #FF6200;">Challenge 1: Spot the Phish</h1>
   </div>
 </div>
 
 <div class="container my-4">
-  <div class="row justify-content-center">
+  <div class="row justify-content-centre">
     <div class="col-lg-10">
       <div class="card shadow-sm p-4 mb-4"">
-        <h3 class="text-center mb-3" style="color: #FF6200;">Protect Yourself from Phishing</h3>
+        <h3 class="text-centre mb-3" class="intro-section-title">Protect Yourself from Phishing</h3>
         
         <p class="lead">
-          Every day, Rapid7's Moose protect businesses from phishing attacks — fake emails designed to steal secrets. By spotting the signs early, we keep the digital world safer!</p>
+          Every day, Rapid7's Moose protect businesses from phishing attacks, fake emails designed to steal secrets. By spotting the signs early, we keep the digital world safer!</p>
         
-        <div class="row align-items-center mb-4">
+        <div class="row align-items-centre mb-4">
           <div class="col-md-7">
-            <h5 class="mb-3" style="color: #FF6200;">What is Phishing? </h5>
+            <h5 class="mb-3" class="intro-section-title">What is Phishing? </h5>
             <p>Phishing is when someone sends a message pretending to be a trusted source, but they're really trying to trick you into:</p>
             <ul>
               <li>Giving away personal information</li>
@@ -26,18 +26,17 @@
               <li>Downloading harmful files</li>
             </ul>
           </div>
-          <div class="col-md-5 text-center">
+          <div class="col-md-5 text-centre">
             <img src="{{ url_for('static', filename='images/phishing.png') }}" 
                  alt="Phishing Example" 
-                 class="img-fluid rounded" 
-                 style="max-height: 180px;">
+                 class="img-fluid rounded appspider-intro-img">
             <p class="small text-muted mt-2">Learn to spot fake emails!</p>
           </div>
         </div>
         
         <div class="bg-light p-3 rounded mb-4">
           <h5 class="mb-3">Warning Signs to Watch For:</h5>
-          <div class="row text-center g-3">
+          <div class="row text-centre g-3">
             <div class="col-md-3">
               <div class="card h-100 border-danger">
                 <div class="card-body">
@@ -73,7 +72,7 @@
           </div>
         </div>
         
-        <h4 class="mt-4 mb-3 text-center" style="color: #FF6200;">How to Play</h4>
+        <h4 class="mt-4 mb-3 text-centre" class="intro-section-title">How to Play</h4>
         
         <div class="row mb-3">
           <div class="col-md-6">
@@ -88,15 +87,15 @@
             <div class="card h-100 border-warning">
               <div class="card-body">
                 <h5 class="card-title">Make Your Choice</h5>
-                <p class="card-text">Click <span style="color:#dc3545; font-weight:bold;">PHISH</span> if it's suspicious, or <span style="color:#28a745; font-weight:bold;">SAFE</span> if it looks okay!</p>
+                <p class="card-text">Click <span class="text-phish">PHISH</span> if it's suspicious, or <span class="text-safe">SAFE</span> if it looks okay!</p>
               </div>
             </div>
           </div>
         </div>
         
         <div class="alert alert-info">
-          <div class="d-flex align-items-center">
-            <div class="me-3">💡</div>
+          <div class="d-flex align-items-centre">
+            <div class="me-3"><i class="fas fa-shield-alt" class="intro-search-icon"></i></div>
             <div>
               <strong>Security Tip:</strong> Always think before you click! Even if an email looks like it's from someone you know, be careful with unexpected links or attachments.
             </div>
@@ -104,8 +103,8 @@
         </div>
       </div>
       
-      <div class="text-center mt-4">
-        <button id="start-btn" class="btn btn-next fw-bold">Start Phishing Challenge! 🎣</button>
+      <div class="text-centre mt-4">
+        <button id="start-btn" class="btn btn-next fw-bold btn-lg">Start Phishing Challenge! <i class="fas fa-fish"></i></button>
       </div>
     </div>
   </div>

@@ -3,14 +3,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Empower Girls CTF</title>
+    <title>Rapid7</title>
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/rapid7-square.png') }}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap Icons (alternative icon library) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/tippy.css">
     <link rel="stylesheet" href="https://unpkg.com/dragula@3.7.3/dist/dragula.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cipher-challenge@1.0.0/dist/cipher-challenge.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <style>
         body {
@@ -29,26 +32,26 @@
 </head>
 <body>
     <!-- Navigation bar with Rapid7 styling -->
-    <nav class="navbar navbar-expand-lg" style="background-color: #000000;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <div class="row w-100 align-items-center">
+            <div class="row w-100 align-items-center mx-0">
                 <!-- Left-aligned logo -->
                 <div class="col-auto">
                     <a href="{{ url_for('home') }}">
-                        <img src="{{ url_for('static', filename='images/rapid7-logo.png') }}" alt="Rapid7 Logo" style="height: 80px; margin-right: 15px;">
+                        <img src="{{ url_for('static', filename='images/rapid7-logo.png') }}" alt="Rapid7 Logo" class="rapid7-logo">
                     </a>
                 </div>
                 <!-- Center-aligned title -->
                 <div class="col text-center">
-                    <a class="navbar-brand text-white" href="{{ url_for('home') }}">
-                        <strong>Empower Girls CTF</strong>
+                    <a class="navbar-brand text-white mb-0" href="{{ url_for('home') }}">
+                        <strong>Rapid7 Cybersecurity Challenge</strong>
                     </a>
                 </div>
                 <!-- Right-aligned secret button -->
                 <div class="col-auto text-end">
                     <form method="POST" action="{{ url_for('finish') }}">
-                        <button type="submit" style="background: none; border: none; padding: 0;">
-                            <img src="{{ url_for('static', filename='images/empower-girls-icon.png') }}" alt="Empower Girls Icon" style="height: 70px;">
+                        <button type="submit" class="btn-transparent">
+                            <img src="{{ url_for('static', filename='images/empower-girls-icon.png') }}" alt="Empower Girls Icon" class="empower-icon">
                         </button>
                     </form>
                 </div>
@@ -74,15 +77,15 @@
                     <!-- Enlarged team icon (3x original size) -->
                     <div class="score-icon me-4">
                         <img src="{{ url_for('static', filename='images/icon-team.png') }}" alt="Team" 
-                             style="height: 120px; width: auto;">
+                             class="team-icon-large">
                     </div>
                     <!-- Horizontal layout for score text and value -->
                     <div class="score-content d-flex align-items-center">
-                        <div class="score-label text-uppercase fw-bold me-2" style="font-size: 1.2rem; color: #6c757d;">
+                        <div class="score-label text-uppercase fw-bold me-2" class="score-label-text">
                             Team Score =
                         </div>
-                        <div class="team-score fs-1 fw-bold" style="color: #FF6200;">
-                            <span id="team-score-display">{{ session.get('team_score', 0) }}</span>
+                        <div class="team-score fs-1 fw-bold" class="team-score-display">
+                            <span id="team-score-display">{{ team_score if team_score is not none else 0 }}</span>
                         </div>
                     </div>
                 </div>
@@ -95,7 +98,7 @@
     <footer class="text-center py-4 bg-light text-dark">
         <div class="d-flex flex-column align-items-center">
             <div class="p-3 border rounded bg-white">
-                <img src="{{ url_for('static', filename='images/empower-girls-brand.png') }}" alt="Empower Girls Icon" style="height: 80px; margin-bottom: 10px;">
+                <img src="{{ url_for('static', filename='images/empower-girls-brand.png') }}" alt="Empower Girls Icon" class="footer-brand-logo">
             </div>
             <p class="mb-0 text-secondary">Powered by Rapid7 • Part of the Empower Girls event</p>
         </div>
@@ -107,29 +110,66 @@
     <script src="https://cdn.jsdelivr.net/npm/party-js@latest/bundle/party.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typeit@8.7.1/dist/index.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/cipher-challenge@1.0.0/dist/cipher-challenge.min.js"></script>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
 
     {% block scripts %}{% endblock %}
 
     <script>
+        // Clear localStorage when new team registers
+        (function() {
+            // Get current team_id from session (passed via template)
+            const currentTeamId = {{ session.get('team_id', 'null') }};
+            
+            // Get stored team_id from localStorage
+            const storedTeamId = localStorage.getItem('current_team_id');
+            
+            // If team_id has changed (new team registered), clear all localStorage
+            if (currentTeamId && storedTeamId && currentTeamId !== parseInt(storedTeamId)) {
+                console.log('New team detected. Clearing localStorage...');
+                
+                // Clear all localStorage
+                localStorage.clear();
+                
+                // Store new team_id
+                localStorage.setItem('current_team_id', currentTeamId);
+            } else if (currentTeamId && !storedTeamId) {
+                // First time for this team, store team_id
+                localStorage.setItem('current_team_id', currentTeamId);
+            }
+        })();
+        
         // Update team score on page load and after challenges
         document.addEventListener('DOMContentLoaded', function() {
+            const scoreElement = document.getElementById('team-score-display');
+            console.log('Base template: Score element found:', scoreElement);
+            if (!scoreElement) return;  // Element doesn't exist on this page
+            
+            // Listen for score update events (always add this listener)
+            window.addEventListener('score-updated', function(e) {
+                console.log('Base template: Received score-updated event:', e.detail);
+                scoreElement.textContent = e.detail.newScore;
+                console.log('Base template: Score updated via event to:', e.detail.newScore);
+            });
+            
+            // Only fetch if the element is empty (no server-rendered value)
+            const currentScore = scoreElement.textContent.trim();
+            console.log('Base template: Current score display:', currentScore);
+            if (currentScore !== '') {
+                console.log('Base template: Score already rendered:', currentScore);
+                return;  // Don't overwrite server-rendered score
+            }
+            
             // Fetch current score from server
             fetch('/api/get_team_score')
                 .then(response => response.json())
                 .then(data => {
+                    console.log('Base template: Fetched score from API:', data);
                     if (data.success) {
-                        document.getElementById('team-score-display').textContent = data.score;
+                        scoreElement.textContent = data.score;
                     }
                 })
-                .catch(error => console.error('Error fetching score:', error));
-                
-            // Listen for score update events
-            window.addEventListener('score-updated', function(e) {
-                document.getElementById('team-score-display').textContent = e.detail.newScore;
-            });
+                .catch(error => console.error('Base template: Error fetching score:', error));
         });
     </script>
 </body>

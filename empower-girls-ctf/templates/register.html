@@ -2,7 +2,7 @@
 {% block content %}
 <div class="text-center mb-5">  
   <h1 class="empower-heading">Get Ready to Play!</h1>
-  <p class="lead">Form your team, select your school, and join the <strong>Empower Girls CTF</strong> powered by Rapid7!</p>
+  <p class="lead">Form your team, select your school, and join the <strong>Empower Girls Cybersecurity Challenge</strong> powered by Rapid7!</p>
 </div>
 
 <!-- Sponsor Shoutout Card -->
@@ -10,7 +10,7 @@
   <div class="card-body text-center">
     <img src="{{ url_for('static', filename='images/empower-girls-brand.png') }}" 
          alt="Empower Girls Event Logo" 
-         style="max-width: 150px; height: auto; margin-bottom: 1rem;">
+         class="register-brand-logo">
     <p class="card-text">
       A special thanks to our amazing sponsors for making this event possible!
     </p>
@@ -34,7 +34,202 @@
   <div class="mb-3 row">
     <label for="school_name" class="col-sm-3 col-form-label fw-bold text-end">School Name:</label>
     <div class="col-sm-6">
-      <input type="text" id="school_name" name="school_name" class="form-control" placeholder="e.g. R7 Academy" required>
+      <input type="text" id="school_name" name="school_name" class="form-control" 
+             list="ni-schools" placeholder="Start typing your school name..." required>
+      <datalist id="ni-schools">
+        <option value="Abbey Christian Brothers Grammar School, Newry">
+        <option value="Abbey Community College, Newtownabbey">
+        <option value="All Saints College, Belfast">
+        <option value="Antrim Grammar School">
+        <option value="Aquinas Diocesan Grammar School, Belfast">
+        <option value="Ashfield Boys' High School, Belfast">
+        <option value="Ashfield Girls' High School, Belfast">
+        <option value="Assumption Grammar School, Ballynahinch">
+        <option value="Aughnacloy College">
+        <option value="Ballycastle High School">
+        <option value="Ballyclare High School">
+        <option value="Ballyclare Secondary School">
+        <option value="Ballymena Academy">
+        <option value="Ballymoney High School">
+        <option value="Banbridge Academy">
+        <option value="Banbridge High School">
+        <option value="Bangor Academy and Sixth Form College">
+        <option value="Bangor Grammar School">
+        <option value="Belfast Boys' Model School">
+        <option value="Belfast High School">
+        <option value="Belfast Model School For Girls">
+        <option value="Belfast Royal Academy">
+        <option value="Blackwater Integrated College, Downpatrick">
+        <option value="Blessed Trinity College, Belfast">
+        <option value="Bloomfield Collegiate, Belfast">
+        <option value="Breda Academy, Belfast">
+        <option value="Brownlow Integrated College, Craigavon">
+        <option value="Cambridge House Grammar School, Ballymena">
+        <option value="Campbell College, Belfast">
+        <option value="Carrickfergus Academy">
+        <option value="Carrickfergus Grammar School">
+        <option value="Castlederg High School">
+        <option value="City Armagh High School">
+        <option value="Clounagh Junior High School, Portadown">
+        <option value="Coláiste Feirste, Belfast">
+        <option value="Coleraine College">
+        <option value="Coleraine Grammar">
+        <option value="Cookstown High School">
+        <option value="Craigavon Senior High School">
+        <option value="Cross and Passion College, Ballycastle">
+        <option value="Crumlin Integrated College">
+        <option value="Cullybackey College">
+        <option value="Dalriada School, Ballymoney">
+        <option value="De La Salle College, Belfast">
+        <option value="Dean Maguirc College, Omagh">
+        <option value="Devenish College, Enniskillen">
+        <option value="Dominican College, Belfast">
+        <option value="Dominican College, Portstewart">
+        <option value="Down High School, Downpatrick">
+        <option value="Dromore High School">
+        <option value="Drumglass High School, Dungannon">
+        <option value="Drumragh Integrated College, Omagh">
+        <option value="Dunclug College, Ballymena">
+        <option value="Dundonald High School, Belfast">
+        <option value="Dunluce School, Bushmills">
+        <option value="Edmund Rice College, Newtownabbey">
+        <option value="Enniskillen Royal Grammar School">
+        <option value="Erne Integrated College, Enniskillen">
+        <option value="Fivemiletown College">
+        <option value="Fort Hill College, Lisburn">
+        <option value="Foyle College, Derry">
+        <option value="Friends' School, Lisburn">
+        <option value="Gaelcholáiste Dhoire, Dungiven">
+        <option value="Glastry College, Newtownards">
+        <option value="Glengormley High School">
+        <option value="Glenlola Collegiate, Bangor">
+        <option value="Grosvenor Grammar School, Belfast">
+        <option value="Hazelwood College, Newtownabbey">
+        <option value="Holy Cross College, Strabane">
+        <option value="Holy Trinity College, Cookstown">
+        <option value="Hunterhouse College, Belfast">
+        <option value="Integrated College Dungannon">
+        <option value="Kilkeel High School">
+        <option value="Killicomaine Junior High School, Portadown">
+        <option value="Lagan College, Belfast">
+        <option value="Larne Grammar School">
+        <option value="Larne High School">
+        <option value="Laurelhill Community College, Lisburn">
+        <option value="Lecale Trinity Grammar School, Downpatrick">
+        <option value="Limavady Grammar School">
+        <option value="Limavady High School">
+        <option value="Lismore Comprehensive School, Craigavon">
+        <option value="Lisnagarvey High School, Lisburn">
+        <option value="Lisneal College, Derry">
+        <option value="Loreto College, Coleraine">
+        <option value="Loreto Grammar School, Omagh">
+        <option value="Lumen Christi College, Derry">
+        <option value="Lurgan College">
+        <option value="Lurgan Junior High">
+        <option value="Magherafelt High School">
+        <option value="Malone Integrated College, Belfast">
+        <option value="Markethill High School">
+        <option value="Mercy College Belfast">
+        <option value="Methodist College, Belfast">
+        <option value="Mount Lourdes Grammar School, Enniskillen">
+        <option value="Movilla High School, Newtownards">
+        <option value="Nendrum College, Newtownards">
+        <option value="New-Bridge Integrated College, Banbridge">
+        <option value="Newry High School">
+        <option value="Newtownhamilton High School">
+        <option value="North Coast Integrated College, Coleraine">
+        <option value="Oakgrove Integrated College, Derry">
+        <option value="Omagh Academy">
+        <option value="Omagh High School">
+        <option value="Our Lady and St Patrick's College, Belfast">
+        <option value="Our Lady of Lourdes High School, Ballymoney">
+        <option value="Our Lady's Grammar School, Newry">
+        <option value="Parkhall Integrated College, Antrim">
+        <option value="Portadown College">
+        <option value="Priory Integrated College, Holywood">
+        <option value="Rainey Endowed School, Magherafelt">
+        <option value="Rathfriland High School">
+        <option value="Rathmore Grammar School, Belfast">
+        <option value="Regent House School, Newtownards">
+        <option value="Royal Belfast Academical Institution">
+        <option value="Sacred Heart College, Omagh">
+        <option value="Sacred Heart Grammar School, Newry">
+        <option value="Saintfield High School">
+        <option value="Shimna Integrated College, Newcastle">
+        <option value="Slemish College, Ballymena">
+        <option value="Sperrin Integrated College, Magherafelt">
+        <option value="St Aidan's High School, Derrylin">
+        <option value="St Benedict's College, Randalstown">
+        <option value="St Brigid's College, Derry">
+        <option value="St Catherine's College, Armagh">
+        <option value="St Cecilia's College, Derry">
+        <option value="St Ciaran's High School, Ballygawley">
+        <option value="St Colm's High School, Belfast">
+        <option value="St Colm's High School, Draperstown">
+        <option value="St Colman's College, Newry">
+        <option value="St Colman's High and Sixth Form College, Ballynahinch">
+        <option value="St Colmcille's High School, Crossgar">
+        <option value="St Columba's College, Portaferry">
+        <option value="St Columbanus' College, Bangor">
+        <option value="St Columb's College, Derry">
+        <option value="St Conor's College, Portglenone">
+        <option value="St Dominic's Grammar School for Girls, Belfast">
+        <option value="St Fanchea's College, Enniskillen">
+        <option value="St Genevieve's High School, Belfast">
+        <option value="St John the Baptist College, Armagh">
+        <option value="St John's Business and Enterprise College, Omagh">
+        <option value="St Joseph's Boys' High School, Newry">
+        <option value="St Joseph's Boys' School, Derry">
+        <option value="St Joseph's College, Belfast">
+        <option value="St Joseph's College, Coalisland">
+        <option value="St Joseph's College, Coleraine">
+        <option value="St Joseph's College, Enniskillen">
+        <option value="St Joseph's Grammar School, Donaghmore">
+        <option value="St Joseph's High School, Crossmaglen">
+        <option value="St Kevin's College, Belleek">
+        <option value="St Killian's College, Ballymena">
+        <option value="St Louis Grammar School, Ballymena">
+        <option value="St Louis Grammar School, Kilkeel">
+        <option value="St Louise's Comprehensive College, Belfast">
+        <option value="St Malachy's College, Belfast">
+        <option value="St Malachy's High School, Castlewellan">
+        <option value="St Mark's High School, Warrenpoint">
+        <option value="St Mary's Christian Brothers' Grammar School, Belfast">
+        <option value="St Mary's College, Derry">
+        <option value="St Mary's College, Irvinestown">
+        <option value="St Mary's Grammar School, Magherafelt">
+        <option value="St Mary's High School, Brollagh">
+        <option value="St Mary's High School, Limavady">
+        <option value="St Mary's High School, Newry">
+        <option value="St Michael's College, Enniskillen">
+        <option value="St Patrick's Academy, Dungannon">
+        <option value="St Patrick's Academy, Lisburn">
+        <option value="St Patrick's Co-ed Comprehensive College, Maghera">
+        <option value="St Patrick's College, Ballymena">
+        <option value="St Patrick's College, Banbridge">
+        <option value="St Patrick's College, Derry">
+        <option value="St Patrick's College, Dungannon">
+        <option value="St Patrick's Grammar School, Armagh">
+        <option value="St Patrick's High School, Keady">
+        <option value="St Patricks & St Brigids College, Derry">
+        <option value="St Paul's High School, Bessbrook">
+        <option value="St Pius X College, Magherafelt">
+        <option value="St Ronan's College, Lurgan">
+        <option value="Strabane Academy">
+        <option value="Strangford Integrated College, Carrowdore">
+        <option value="Strathearn School, Belfast">
+        <option value="Sullivan Upper School, Holywood">
+        <option value="Tandragee Junior High School">
+        <option value="The High School Ballynahinch">
+        <option value="The Royal School Armagh">
+        <option value="The Royal School Dungannon">
+        <option value="Thornhill College, Derry">
+        <option value="Ulidia Integrated College, Carrickfergus">
+        <option value="Victoria College, Belfast">
+        <option value="Wallace High School, Lisburn">
+        <option value="Wellington College, Belfast">
+      </datalist>
+      <small class="text-muted">Start typing to search from 190+ Northern Ireland schools</small>
     </div>
   </div>
 
@@ -49,7 +244,7 @@
   <!-- Cartoon Girl Hackers Celebrating Illustration -->
   <img src="{{ url_for('static', filename='images/excited-girls.png') }}"
        alt="Empowered Girls Getting Ready to Hack" 
-       style="max-width: 50%; height: auto; margin-bottom: 1.5rem;">
+       class="register-excited-girls">
 </div>
 {% endblock %}
 

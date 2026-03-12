@@ -7,17 +7,17 @@
         <div class="col-md-4 text-center">
             <img src="{{ url_for('static', filename='images/empower-girls-rapid7.png') }}" 
                  alt="Empower Girls Logo" 
-                 style="max-width: 200px; height: auto; margin-bottom: 1.5rem;">
-            <h1 class="fw-bold" style="color: #FF6200;">Welcome to Empower Girls CTF!</h1>
+                 class="home-logo">
+            <h1 class="fw-bold home-title">Welcome to the Rapid7 Cybersecurity Challenge for Empower Girls!</h1>
             <p class="lead">Join the challenge and learn how to stay safe online while having fun!</p>
             <a href="{{ url_for('register') }}" class="btn btn-lg btn-submit fw-bold mt-3">
-                Let's Get Started 🚀
+                Let's Get Started <i class="fas fa-rocket"></i>
             </a>
         </div>
         <!-- Right Column: Moose Intro -->
         <div class="col-md-8 text-center">
             <div class="card shadow-sm p-4 mb-4">
-                <h3 class="text-center mb-3" style="color: #FF6200;">Meet the Moose!</h3>
+                <h3 class="text-center mb-3" class="home-title">Meet the Moose!</h3>
                 <p class="lead">
                     Join the challenge and learn how to stay safe online while having fun with Rapid7's cybersecurity experts!
                 </p>
@@ -37,7 +37,7 @@
                         <img src="{{ url_for('static', filename='images/rapid7-moose.png') }}" 
                              alt="Rapid7 Moose" 
                              class="img-fluid rounded" 
-                             style="max-height: 180px; animation: bounce 2s infinite;">
+                             class="home-moose-img">
                         <p class="small text-muted mt-2">The mighty Moose – our cybersecurity guide!</p>
                     </div>
                 </div>

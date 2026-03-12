@@ -1,4 +1,8 @@
 {% extends "base.html" %}
+{% from 'partials/browser_window.html' import browser_window %}
+{% from 'partials/blog_card.html' import blog_card %}
+{% from 'partials/challenge_header.html' import challenge_header %}
+{% from 'partials/hint_card.html' import hint_card %}
 
 {% block content %}
 
@@ -8,31 +12,23 @@
 </div>
 
 <!-- Challenge 4 Content -->
-<div class="challenge-content challenge4-content">
-  <div class="container" style="max-width: 95%; width: 1200px;">
+<div class="challenge-content challenge4-content d-none">
+  <div class="container challenge4-container">
 
-    <div class="text-center mb-3">
-      <h3 class="fw-semibold" style="font-size: 1.5rem;">Find Fred’s Hidden Password</h3>
-      <p style="font-size: 0.9rem;">Scroll through Fred's blog and uncover the password hidden in plain sight!</p>
-    </div>
+    <!-- Challenge Header -->
+    {{ challenge_header('Challenge 4: Hidden Passwords', 'Scroll through Forgetful Fred\'s blog and uncover the password hidden in plain sight!', 'fa-search') }}
 
-    <div class="browser-window mb-4">
-      <div class="browser-bar d-flex align-items-center justify-content-start px-2">
-        <span class="circle red"></span>
-        <span class="circle yellow"></span>
-        <span class="circle green"></span>
-        <div class="flex-grow-1 text-center">
-          <h2 style="color: #333; margin: 0; font-size: 1.5rem;">Forgetful Fred's BlogZone</h2>
-        </div>
-      </div>
-
+    {% set browser_content %}
       <main class="main-content p-2">
+        <div class="text-center mb-3">
+          <h2 class="blog-title">Forgetful Fred's BlogZone</h2>
+        </div>
         <div class="row g-0 align-items-center w-100 mx-0">
           <div class="col-md-3 text-center mb-2 mb-md-0 ps-2">
             <div class="d-flex justify-content-center align-items-center h-100">
               <img src="{{ url_for('static', filename='images/blog-zone-logo.png') }}"
                    alt="BlogZone Logo"
-                   style="max-width: 100%; height: auto; max-height: 150px;">
+                   class="blog-logo">
             </div>
           </div>
 
@@ -40,28 +36,28 @@
             <div class="row mb-3">
               <div class="col-12 text-center">
                 <h2 class="mb-2 pt-3">Login Portal</h2>
-                <p class="mb-2" style="font-size: 0.9rem;">
+                <p class="mb-2 challenge4-subtitle">
                   Use the password Fred cleverly has hidden in <strong>plain sight</strong>!
                 </p>
               </div>
             </div>
-            <form onsubmit="checkPassword(event)" class="login-form p-3 border border-secondary rounded bg-light w-100 mx-auto" style="max-width: 550px;">
+            <form onsubmit="checkPassword(event)" class="login-form p-3 border border-secondary rounded bg-light w-100 mx-auto">
               <div class="row">
                 <div class="col-sm-6 mb-3">
-                  <label for="username" class="fw-bold" style="font-size: 0.9rem;">Username</label>
+                  <label for="username" class="fw-bold" class="challenge4-subtitle">Username</label>
                   <input type="text" id="username" value="ForgetfulFred" readonly
                          class="form-control" style="font-size: 0.9rem; background-color: #f8f8f8;">
                 </div>
 
                 <div class="col-sm-6 mb-3">
-                  <label for="passwordInput" class="fw-bold" style="font-size: 0.9rem;">Password</label>
+                  <label for="passwordInput" class="fw-bold" class="challenge4-subtitle">Password</label>
                   <input type="text" id="passwordInput" placeholder="Enter password here..." required
-                         class="form-control" style="font-size: 0.9rem;">
+                         class="form-control" class="challenge4-subtitle">
                 </div>
               </div>
               <div class="row">
                 <div class="col-12">
-                  <button type="submit" class="btn btn-primary w-100">
+                  <button type="submit" class="btn btn-primary btn-lg w-100">
                     Login
                   </button>
                 </div>
@@ -70,7 +66,7 @@
 
             <!-- Add this new feedback container outside the form -->
             <div id="feedback-container" class="mt-3 py-2 text-center">
-              <div id="feedback" class="feedback" style="font-size: 0.9rem;"></div>
+              <div id="feedback" class="feedback challenge4-subtitle"></div>
             </div>
 
             <div id="attempts-counter" class="attempts-counter mt-3 mb-2">
@@ -84,89 +80,64 @@
         <div class="row g-3 mt-3">
           <!-- Dog blog post -->
           <div class="col-6">
-            <div class="blog-card p-3" style="min-height: 200px;">
-              <div class="row h-100">
-                <div class="col-3 d-flex align-items-center justify-content-center">
-                  <img src="{{ url_for('static', filename='images/icon-dog.png') }}" alt="Meet My Dog!" 
-                       style="width: 100%; height: auto; object-fit: contain; padding: 5px;">
-                </div>
-                <div class="col-9 d-flex flex-column justify-content-center">
-                  <h4>Meet My Dog!</h4>
-                  <p>My dog <strong>Milo</strong> loves to chase his <strong>bubble</strong> toy! He also barks at the mail carrier and eats my socks!</p>
-                </div>
-              </div>
-            </div>
+            {% set dog_content %}
+              <p>My dog <strong>Milo</strong> loves to chase his <strong>bubble</strong> toy! He also barks at the mail carrier and eats my socks!</p>
+            {% endset %}
+            {{ blog_card('Meet My Dog!', dog_content, url_for('static', filename='images/icon-dog.png'), 'Meet My Dog!', '#4CAF50', '2 days ago', 5, 23) }}
           </div>
 
           <!-- Birthday blog post -->
           <div class="col-6">
-            <div class="blog-card p-3" style="min-height: 200px;">
-              <div class="row h-100">
-                <div class="col-3 d-flex align-items-center justify-content-center">
-                  <img src="{{ url_for('static', filename='images/icon-cake.png') }}" alt="My Birthday Bash" 
-                       style="width: 100%; height: auto; object-fit: contain; padding: 5px;">
-                </div>
-                <div class="col-9 d-flex flex-column justify-content-center">
-                  <h4>My Birthday Bash</h4>
-                  <p>I turned 12 on March 4, <strong>2013</strong> and somehow lost my USB drive during the party! I'm so forgetful!</p>
-                </div>
-              </div>
-            </div>
+            {% set birthday_content %}
+              <p>I turned 12 on March 4, <strong>2013</strong> and somehow lost my USB drive during the party! I'm so forgetful!</p>
+            {% endset %}
+            {{ blog_card('My Birthday Bash', birthday_content, url_for('static', filename='images/icon-cake.png'), 'My Birthday Bash', '#2196F3', '1 week ago', 12, 45) }}
           </div>
 
           <!-- Favorite color blog post -->
           <div class="col-6">
-            <div class="blog-card p-3" style="min-height: 200px;">
-              <div class="row h-100">
-                <div class="col-3 d-flex align-items-center justify-content-center">
-                  <img src="{{ url_for('static', filename='images/icon-paint.png') }}" alt="Favourite Colour?" 
-                       style="width: 100%; height: auto; object-fit: contain; padding: 5px;">
-                </div>
-                <div class="col-9 d-flex flex-column justify-content-center">
-                  <h4>Favourite Colour?</h4>
-                  <p><strong>White</strong> is like a blank page—so cool! I also love using the <strong>!</strong> symbol in all my writing! Exciting, right<strong>!</strong></p>
-                </div>
-              </div>
-            </div>
+            {% set color_content %}
+              <p><strong>White</strong> is like a blank page—so cool! I also love using the <strong>!</strong> symbol in all my writing! Exciting, right<strong>!</strong></p>
+            {% endset %}
+            {{ blog_card('Favourite Colour?', color_content, url_for('static', filename='images/icon-paint.png'), 'Favourite Colour?', '#9C27B0', '3 days ago', 8, 31) }}
           </div>
 
           <!-- Random thoughts blog post -->
           <div class="col-6">
-            <div class="blog-card p-3" style="min-height: 200px;">
-              <div class="row h-100">
-                <div class="col-3 d-flex align-items-center justify-content-center">
-                  <img src="{{ url_for('static', filename='images/icon-question.png') }}" alt="Random Thoughts" 
-                       style="width: 100%; height: auto; object-fit: contain; padding: 5px;">
-                </div>
-                <div class="col-9 d-flex flex-column justify-content-center">
-                  <h4>Random Thoughts</h4>
-                  <p>Why do USBs always go in the wrong way? Also, I keep all my passwords <strong>simple</strong> so I don't forget them!</p>
-                </div>
-              </div>
-            </div>
+            {% set thoughts_content %}
+              <p>Why do USBs always go in the wrong way? Also, I keep all my passwords <strong>simple</strong> so I don't forget them!</p>
+            {% endset %}
+            {{ blog_card('Random Thoughts', thoughts_content, url_for('static', filename='images/icon-question.png'), 'Random Thoughts', '#FF9800', '5 days ago', 15, 38) }}
           </div>
 
           <!-- Hide and Seek blog post -->
           <div class="col-6">
-            <div class="blog-card p-3" style="min-height: 200px;">
-              <div class="row h-100">
-                <div class="col-3 d-flex align-items-center justify-content-center">
-                  <img src="{{ url_for('static', filename='images/icon-note.png') }}" alt="Hide and Seek" 
-                       style="width: 100%; height: auto; object-fit: contain; padding: 5px;">
-                </div>
-                <div class="col-9 d-flex flex-column justify-content-center">
-                  <h4>Hide and Seek</h4>
-                  <p>Fred hides his password in <strong>plain sight</strong>! Sometimes the best hiding spot is right in front of you.</p>
-                  <p>
-                    <span style="color: white; font-size: 0.9rem; letter-spacing: 0.5px;">bubbleMilo2013!</span>
-                  </p>
-                  <p>I need a better system for organizing my digital life. These blog posts are getting messy!</p>
-                </div>
-              </div>
-            </div>
+            {% set hideseek_content %}
+              <p>Fred hides his password in <strong>plain sight</strong>! Sometimes the best hiding spot is right in front of you.</p>
+              <p class="hidden-password-area">
+                <span style="color: white; font-size: 0.9rem; letter-spacing: 0.5px;">bubbleMilo2013!</span>
+              </p>
+              <p>I need a better system for organizing my digital life. These blog posts are getting messy!</p>
+            {% endset %}
+            {{ blog_card('Hide and Seek', hideseek_content, url_for('static', filename='images/icon-note.png'), 'Hide and Seek', '#E91E63', '4 days ago', 7, 19) }}
+          </div>
+
+          <!-- Hobby blog post -->
+          <div class="col-6">
+            {% set hobby_content %}
+              <p>I love collecting vintage video games! My collection started in <strong>2013</strong> with a classic Nintendo. Now I have over 50 games!</p>
+            {% endset %}
+            {{ blog_card('My Favorite Hobby', hobby_content, url_for('static', filename='images/icon-gamepad.png'), 'My Favorite Hobby', '#00BCD4', '6 days ago', 10, 27) }}
           </div>
         </div>
       </main>
+    {% endset %}
+
+    {{ browser_window('', browser_content, 'mb-4', content_class='') }}
+    
+    <!-- Hint Card -->
+    <div class="mt-4">
+      {{ hint_card('hint-btn-challenge4', 'hint-display-challenge4') }}
     </div>
   </div>
 </div>
@@ -175,5 +146,7 @@
 {% block scripts %}
 {{ super() }}
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/utils/score-manager.js') }}"></script>
+<script src="{{ url_for('static', filename='js/utils/progress-manager.js') }}"></script>
 <script src="{{ url_for('static', filename='js/challenge4.js') }}"></script>
 {% endblock %}

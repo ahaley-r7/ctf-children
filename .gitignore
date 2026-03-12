@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+.eggs/
+*.egg
+
+# Flask
+instance/
+.webassets-cache
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment variables
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Test files and results
+tests/
+browser/
+results/
+test-results/
+*.log
+*.xml
+*.html
+*.png
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Robot Framework
+*.robot
+resources/
+config/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+cursor_test.html
+
+# Docker
+docker-compose.override.yml
+
+# Git
+.git/

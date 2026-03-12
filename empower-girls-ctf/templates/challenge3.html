@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% from 'partials/modal.html' import modal %}
+{% from 'partials/hint_card.html' import hint_card %}
+{% from 'partials/challenge_header.html' import challenge_header %}
 
 {% block content %}
   {# Intro hidden card #}
@@ -6,51 +9,340 @@
     {% include 'intros/challenge3_intro.html' %}
   </div>
 
-  {# Encryption challenge, toggled by script.js #}
+  {# Substitution Cipher Challenge #}
   <div class="challenge-content challenge3-content d-none">
-    <div class="card terminal-card bg-black text-success shadow-lg">
-      <div class="card-body max-height:700px;">
-        <h4 class="text-center encrypted-header mb-3 fw-bold">Encrypted Message</h4>
-        <pre id="scrambled-text" class="text-center fs-4 bg-black border-success rounded p-3">???</pre>
-        <p id="instruction-text" class="text-center text-light fst-italic typewriter-text">This message has been 'spun' several times using a letter shifting technique. Your job is to spin it back to its original form by choosing the correct number.</p>
-
-        <div class="my-3 text-center">
-          <p id="prompt-text" class="text-light mb-2 typewriter-text">Choose a number to spin and decode the message:</p>
-          <div class="mx-auto" style="max-width: 400px;">
-            <div class="btn-group btn-group-lg" role="group" aria-label="Shift options">
-              <button type="button" class="btn btn-outline-success shift-btn" data-shift="0">0</button>
-              <button type="button" class="btn btn-outline-success shift-btn" data-shift="0">0</button>
-              <button type="button" class="btn btn-outline-success shift-btn" data-shift="0">0</button>
-              <button type="button" class="btn btn-outline-success shift-btn" data-shift="0">0</button>
-              <button type="button" class="btn btn-outline-success shift-btn" data-shift="0">0</button>
+    <div class="container">
+      <!-- Challenge Header -->
+      <div class="row justify-content-center mb-4">
+        <div class="col-12">
+          {{ challenge_header('Challenge 3: Substitution Cipher', 'Decode the encrypted message by mapping each encrypted letter to its original letter. Use frequency analysis and pattern recognition to crack the code!', 'fa-lock') }}
+        </div>
+      </div>
+      
+      {# Scenario Banner (populated by JS) #}
+      <div id="scenario-banner" class="scenario-banner mb-4 p-4 rounded d-none">
+        <div class="d-flex align-items-center">
+          <div class="scenario-icon me-3">
+            <img id="scenario-icon-img" src="" alt="">
+          </div>
+          <div class="flex-grow-1">
+            <h3 id="scenario-title" class="mb-2"></h3>
+            <p id="scenario-description" class="mb-0"></p>
+          </div>
+        </div>
+      </div>
+      {# Main decoder area - centered and contained #}
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="card bg-white shadow-lg mb-4" style="border: none; border-radius: 15px;">
+            <div class="card-body p-4">
+              <h4 class="text-center mb-3 fw-bold d-flex align-items-center justify-content-center gap-2 intro-section-title">
+                <img src="{{ url_for('static', filename='images/locked-icon.png') }}" alt="Lock" class="locked-icon">
+                Encrypted Message
+              </h4>
+              <p class="text-center mb-1 small instruction-text-red"><strong>Red letters:</strong> The encrypted code</p>
+              <p class="text-center mb-1 small instruction-text-blue"><strong>Blue letters below:</strong> Revealed by hints</p>
+              <p class="text-center mb-1 small instruction-text-green"><strong>Green letters below:</strong> Correct decoded letters</p>
+              <p class="text-center mb-3 small instruction-text-yellow"><strong>Yellow letters below:</strong> Incorrect guesses</p>
+              
+              {# Decoder interface container - Retro Monitor and Keyboard #}
+              <div id="decoder-container" class="mb-4">
+                {# Retro CRT Monitor #}
+                <div class="retro-monitor-bezel">
+                  <div class="monitor-brand-label">CYPHER-TERM 3000</div>
+                  
+                  {# CRT Screen #}
+                  <div class="retro-crt-screen">
+                    <div class="crt-scanlines"></div>
+                    <div class="crt-screen-glow"></div>
+                    <div class="crt-reflection"></div>
+                    <div id="cipher-display" class="cipher-display mb-4"></div>
+                  </div>
+                  
+                  {# Bottom Control Panel #}
+                  <div class="monitor-bottom-panel">
+                    {# Left: Disk Drives #}
+                    <div class="control-section-left">
+                      <div class="disk-drive floppy-drive">
+                        <div class="floppy-slot"></div>
+                        <div class="drive-label">A:</div>
+                      </div>
+                      <div class="disk-drive cd-drive">
+                        <div class="cd-slot"></div>
+                        <div class="cd-button"></div>
+                      </div>
+                      <div class="control-divider"></div>
+                    </div>
+                    
+                    {# Center: LEDs and Ports #}
+                    <div class="control-section-center">
+                      <div style="display: flex; gap: 12px;">
+                        <div class="led-box">
+                          <div class="led-indicator led-power"></div>
+                          <div class="led-label">PWR</div>
+                        </div>
+                        <div class="led-box">
+                          <div class="led-indicator led-activity"></div>
+                          <div class="led-label">HDD</div>
+                        </div>
+                      </div>
+                      <div class="control-divider"></div>
+                      <div class="ports-container">
+                        <div class="usb-port">
+                          <div class="usb-icon"><i class="fas fa-bolt"></i></div>
+                        </div>
+                        <div class="audio-jack"></div>
+                      </div>
+                      <div class="control-divider"></div>
+                    </div>
+                    
+                    {# Right: Control Buttons #}
+                    <div class="control-section-right">
+                      <div class="monitor-control-btn power-button">
+                        <div class="power-symbol"><i class="fas fa-power-off"></i></div>
+                      </div>
+                      <div class="monitor-control-btn brightness-btn"><i class="fas fa-sun"></i></div>
+                      <div class="monitor-control-btn contrast-btn"><i class="fas fa-adjust"></i></div>
+                      <div class="monitor-control-btn menu-btn"><i class="fas fa-bars"></i></div>
+                    </div>
+                  </div>
+                </div>
+                
+                {# QWERTY Keyboard #}
+                <div id="qwerty-keyboard" class="qwerty-keyboard mt-4">
+                  <p class="keyboard-title">CLICK THE ENCRYPTED LETTER ABOVE, THEN TRY DIFFERENT LETTERS BELOW </p>
+                  
+                  {# Number Row (Decorative) #}
+                  <div class="d-flex justify-content-center gap-2 mb-2">
+                    {% for num in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'] %}
+                      <div class="decorative-key" style="width: 55px;">{{ num }}</div>
+                    {% endfor %}
+                  </div>
+                  
+                  {# QWERTY Row #}
+                  <div id="keyboard-row-1" class="d-flex justify-content-center gap-2 mb-2"></div>
+                  
+                  {# ASDFGHJKL Row #}
+                  <div id="keyboard-row-2" class="d-flex justify-content-center gap-2 mb-2"></div>
+                  
+                  {# ZXCVBNM Row with Shift #}
+                  <div id="keyboard-row-3" class="d-flex justify-content-center gap-2 mb-2">
+                    <div class="decorative-key" style="width: 90px;">SHIFT</div>
+                    <div id="keyboard-row-3-letters" class="d-flex gap-2"></div>
+                    <div class="decorative-key" style="width: 90px;">SHIFT</div>
+                  </div>
+                  
+                  {# Bottom Row with Ctrl, Alt, Space #}
+                  <div class="d-flex justify-content-center gap-2">
+                    <div class="decorative-key" style="width: 80px;">CTRL</div>
+                    <div class="decorative-key" style="width: 70px;">ALT</div>
+                    <div class="decorative-key" style="width: 350px;"></div>
+                    <div class="decorative-key" style="width: 70px;">ALT</div>
+                    <div class="decorative-key" style="width: 80px;">CTRL</div>
+                  </div>
+                </div>
+                
+                {# Current Mappings Display #}
+                <div id="current-mappings" class="mt-4">
+                  <p class="text-muted text-center">Click on letters above to start mapping...</p>
+                </div>
+                
+                {# Mappings Table Template (hidden, cloned by JS) #}
+                <template id="mappings-table-template">
+                  <div>
+                    <h5 class="text-center mb-3">Your Mappings</h5>
+                    <div id="mappings-badges" class="d-flex flex-wrap justify-content-center gap-2"></div>
+                    <div class="text-center mt-3">
+                      <button class="btn btn-warning btn-sm" onclick="clearAllMappings()">Clear All</button>
+                    </div>
+                  </div>
+                </template>
+                
+                {# Mapping Badge Template (hidden, cloned by JS) #}
+                <template id="mapping-badge-template">
+                  <div class="mapping-badge rounded p-2 d-flex align-items-center">
+                    <span class="fw-bold encrypted-letter"></span>
+                    <span class="mx-2" style="color: #999;">→</span>
+                    <span class="fw-bold plain-letter"></span>
+                    <button class="btn btn-sm btn-outline-danger ms-2 clear-mapping-btn" style="padding: 0.1rem 0.4rem;"><i class="fas fa-times"></i></button>
+                  </div>
+                </template>
+              </div>
+              
+              {# Success Panel (hidden initially) #}
+              <div id="success-panel" class="d-none">
+                <div class="alert alert-success text-center animate-success" style="padding: 3rem; margin: 2rem auto; max-width: 800px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);">
+                  <div class="d-flex align-items-center justify-content-center gap-3 mb-4">
+                    <img src="{{ url_for('static', filename='images/girls-celebrate.png') }}" alt="Success" style="height: 80px;">
+                    <h2 class="mb-0" style="color: #28a745; font-size: 2.5rem;">Congratulations!</h2>
+                  </div>
+                  <p class="lead" style="font-size: 1.5rem; margin-bottom: 2rem;">You've successfully decoded the message!</p>
+                  <div class="points-display my-4" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(40, 167, 69, 0.3);">
+                    <span id="points-earned" class="display-1 text-white fw-bold" style="font-size: 4rem;">5</span>
+                    <span class="fs-3 text-white"> points earned!</span>
+                  </div>
+                  <div class="mt-4 text-start" style="background: #f8f9fa; padding: 2rem; border-radius: 10px;">
+                    <h4 style="color: #FF6200; margin-bottom: 1.5rem;">What You Learnt:</h4>
+                    <ul style="font-size: 1.1rem; line-height: 1.8;">
+                      <li><strong>Substitution Ciphers:</strong> Each letter maps to a different letter, making encryption much stronger than simple shifts.</li>
+                      <li><strong>Frequency Analysis:</strong> By analysing how often letters appear, you can crack codes like a real cryptanalyst!</li>
+                      <li><strong>Pattern Recognition:</strong> Looking for common words and letter patterns helps decode encrypted messages.</li>
+                      <li><strong>Real-World Application:</strong> These techniques protect your passwords, messages, and personal data every day!</li>
+                    </ul>
+                    <p class="text-muted mb-0" style="font-size: 1.1rem; margin-top: 1rem;">You're now equipped with real cryptography skills used by cybersecurity professionals!</p>
+                  </div>
+                </div>
+              </div>
+              
+              {# Validation feedback #}
+              <div id="validation-feedback" class="mt-4"></div>
+              
+              {# Partial Feedback Template #}
+              <template id="partial-feedback-template">
+                <div class="alert alert-warning text-center">
+                  <h5>Almost there!</h5>
+                  <p>You have <span class="correct-count"></span> out of <span class="total-count"></span> letters correct (<span class="percentage"></span>%).</p>
+                  <p class="mb-0">Keep trying! Check the frequency analysis for clues.</p>
+                </div>
+              </template>
             </div>
           </div>
         </div>
-
-        <div class="mx-auto" style="max-width: 500px;">
-          <div class="decoded-preview bg-success bg-opacity-25 rounded border border-success text-white fw-bold p-3 text-center">Spun Message: <span id="decoded-text">...</span></div>
-        </div>
-
-        <p id="result-message" class="text-center fw-bold mt-3"></p>
       </div>
-    </div>
-
-    <!-- Add points display outside the game card -->
-    <div id="points-display-container" class="text-center mt-4 mb-3 d-none">
-      <div class="points-badge d-inline-flex align-items-center bg-dark text-white px-4 py-3 rounded-pill shadow">
-          <span class="text-warning fs-3 fw-bold" id="points-earned">0</span>
-          <span class="text-light ms-2">points earned!</span>
+      
+      {# Hints Section - Bottom #}
+      <div class="row justify-content-center">
+        <div class="col-12">
+          {{ hint_card('hint-btn', 'hint-content', 'showHint()') }}
         </div>
       </div>
     </div>
 
+    {# Next Challenge Button #}
     <div id="next-challenge-container" class="text-center mt-4 d-none">
-      <a href="{{ url_for('challenge4') }}" class="btn btn-warning fw-bold">Next Challenge</a>
+      <a href="{{ url_for('challenge4') }}" class="btn btn-next fw-bold btn-lg px-4 py-2">
+        <i class="fas fa-arrow-right me-2"></i>Next Challenge
+      </a>
     </div>
   </div>
+  
+  {# Hint Confirmation Modal Template #}
+  <template id="hint-modal-template">
+    <div class="hint-modal-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 9999; display: flex; align-items: center; justify-content: center;">
+      <div class="hint-modal" style="background-color: #1a1a1a; border: 2px solid #28a745; border-radius: 8px; padding: 2rem; max-width: 500px; width: 90%; box-shadow: 0 0 20px rgba(40, 167, 69, 0.5);">
+        <div class="modal-header" style="border-bottom: none; padding-bottom: 0;">
+          <h4 class="modal-title" style="color: #28a745; margin-top: 0;"></h4>
+        </div>
+        <div class="modal-body" style="padding: 1rem 0;">
+          <p class="modal-message" style="color: #fff; font-size: 1.1rem; margin: 1rem 0;"></p>
+          <div class="modal-points-info" style="background-color: #2a2a2a; padding: 1rem; border-radius: 4px; margin: 1rem 0;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <span style="color: #aaa;">Current potential points:</span>
+              <span class="current-points" style="color: #28a745; font-weight: bold; font-size: 1.2rem;"></span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: #aaa;">After hint:</span>
+              <span class="new-points" style="color: #ffc107; font-weight: bold; font-size: 1.2rem;"></span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer" style="border-top: none; padding-top: 0;">
+          <div class="modal-buttons">
+            <button class="btn btn-success confirm-btn">Yes, Show Hint</button>
+            <button class="btn btn-secondary cancel-btn">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+  
+  {# Error Modal Template #}
+  <template id="error-modal-template">
+    <div class="hint-modal-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 9999; display: flex; align-items: center; justify-content: center;">
+      <div class="hint-modal" style="background-color: #1a1a1a; border: 2px solid #28a745; border-radius: 8px; padding: 2rem; max-width: 500px; width: 90%; box-shadow: 0 0 20px rgba(40, 167, 69, 0.5);">
+        <div class="modal-header" style="border-bottom: none; padding-bottom: 0;">
+          <h4 class="modal-title" style="color: #28a745; margin-top: 0;"></h4>
+        </div>
+        <div class="modal-body" style="padding: 1rem 0;">
+          <p class="modal-message"></p>
+        </div>
+        <div class="modal-footer" style="border-top: none; padding-top: 0;">
+          <div class="modal-buttons">
+            <button class="btn btn-success ok-btn">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
 {% endblock %}
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/utils/score-manager.js') }}"></script>
+<script src="{{ url_for('static', filename='js/utils/progress-manager.js') }}"></script>
 <script src="{{ url_for('static', filename='js/challenge3.js') }}"></script>
+
+<style>
+  .cipher-letter {
+    display: inline-block;
+    min-width: 30px;
+    text-align: center;
+  }
+  
+  .cipher-letter.mapped {
+    font-size: 0.9rem;
+    line-height: 1.2;
+  }
+  
+  .clickable-letter:hover {
+    background-color: rgba(255, 193, 7, 0.3) !important;
+    transform: scale(1.1);
+  }
+  
+  .mapping-badge {
+    font-family: monospace;
+    font-size: 1rem;
+  }
+  
+  .frequency-row {
+    font-family: monospace;
+  }
+  
+  .frequency-letter {
+    color: #28a745;
+  }
+  
+  .animate-success {
+    animation: slideIn 0.5s ease-out;
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes blink {
+    0%, 49% {
+      opacity: 1;
+    }
+    50%, 100% {
+      opacity: 0.3;
+    }
+  }
+  
+  .terminal-card {
+    border: 2px solid #28a745;
+  }
+  
+  .encrypted-header {
+    color: #28a745;
+    text-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+  }
+</style>
 {% endblock %}

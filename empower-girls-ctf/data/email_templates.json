@@ -1,0 +1,51 @@
+{
+  "challenge1": {
+    "emails": [
+      {
+        "from": "giveaways@tiktok-winners.com",
+        "subject": "<i class='fas fa-check-circle'></i> You Won the TikTok Creator Raffle!",
+        "body": "Hey there superstar!<br>You've won a free phone stand and TikTok hoodie for your awesome videos.<br>Click <span class='tooltip-link' data-tippy-content='https://scam-tiktok-raffle.com'>here</span> to enter your address and claim it!",
+        "logo": "images/logo-fake-tiktok.png",
+        "explanation": "It looks fun and legit, but TikTok doesn't run raffles like this — and they wouldn't ask for your address via random email links.",
+        "is_phish": true,
+        "signature": "TikTok Creator Support"
+      },
+      {
+        "from": "stranger123@randommail.com",
+        "subject": "You're really cute... 😊",
+        "body": "Hey... I found your email somewhere very secret.<br>You seem pretty cool. Let's chat.<br>Click <span class='tooltip-link' data-tippy-content='http://weirdchatroom.site'>here</span> to see my pictures.<br>Also email me back if you want to talk cutie. 💌",
+        "logo": "images/logo-creepy.png",
+        "explanation": "This is a serious red flag. Never respond to strangers — especially adults sending you links or calling you 'cute.'",
+        "is_phish": true,
+        "signature": "Some Guy Online"
+      },
+      {
+        "from": "k.jenkins@rapid7academy.edu",
+        "subject": "Cyber Safety Poster Contest 🖍️",
+        "body": "Hello students!<br>Submit your entry for the annual Cyber Safety Poster Contest by this Friday.<br>Winners get a pizza party! 🍕",
+        "logo": "images/logo-school.png",
+        "explanation": "This is from a teacher at school, with a normal request and no suspicious links.",
+        "is_phish": false,
+        "signature": "Mrs. Jenkins – Cyber Defence Department"
+      },
+      {
+        "from": "updates@cookierunkingdom.com",
+        "subject": "New Cookie Characters + Cherry Blossom Decor 🌸",
+        "body": "Hi sweet friend!<br>Our spring update is here!<br>Log in to meet Cherry Blossom Cookie and decorate your village.<br><br>Read more <span class='tooltip-link' data-tippy-content='https://www.cookierunkingdom.com/updates'>here</span>.",
+        "logo": "images/logo-cookierun.png",
+        "explanation": "Real update news with no strange links, sent from a believable game email domain.",
+        "is_phish": false,
+        "signature": "Cookie Run Devs"
+      },
+      {
+        "from": "nookmail@islandrewards.info",
+        "subject": "You've earned 5,000 Nook Miles!",
+        "body": "Hey Islander!<br>Tom Nook says you've earned bonus miles for being awesome! 🥝<br>Click <span class='tooltip-link' data-tippy-content='http://nook-miles.cool'>here</span> to claim them now.",
+        "logo": "images/logo-fake-animalcrossing.png",
+        "explanation": "The email pretends to be from Nintendo but uses a suspicious domain. It's a sneaky phishing attempt.",
+        "is_phish": true,
+        "signature": "The Nook Inc. Team"
+      }
+    ]
+  }
+}
