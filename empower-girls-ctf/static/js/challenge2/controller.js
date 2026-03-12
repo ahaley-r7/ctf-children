@@ -309,10 +309,45 @@ class Challenge2Controller {
       // Save progress after hint usage
       this.saveProgress();
       
-      // Optionally add a subtle highlight to the vulnerable area
+      // Find and scroll to the vulnerable element
       const vulnerableElement = document.querySelector(`[data-vulnerable="${nextVulnerability}"]`);
       if (vulnerableElement) {
+        // Add pulsing highlight animation
         vulnerableElement.style.animation = 'hint-pulse 2s ease-in-out 3';
+        
+        // Scroll to the element smoothly
+        vulnerableElement.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        });
+        
+        // Add a temporary glow effect
+        vulnerableElement.style.boxShadow = '0 0 20px 5px rgba(255, 193, 7, 0.8)';
+        vulnerableElement.style.transition = 'box-shadow 0.3s ease';
+        
+        // Disable hint button until user clicks the hinted element
+        if (this.hintBtn) {
+          this.hintBtn.disabled = true;
+          this.hintBtn.style.opacity = '0.5';
+          this.hintBtn.style.cursor = 'not-allowed';
+          this.hintBtn.innerHTML = '<i class="fas fa-lightbulb me-2"></i>Click the highlighted area first';
+        }
+        
+        // Set up one-time click listener to re-enable hint button
+        const enableHintButton = () => {
+          if (this.hintBtn) {
+            this.hintBtn.disabled = false;
+            this.hintBtn.style.opacity = '';
+            this.hintBtn.style.cursor = '';
+            this.hintBtn.innerHTML = '<i class="fas fa-lightbulb me-2"></i>Get Hint (-1 point)';
+          }
+          // Remove glow effect
+          vulnerableElement.style.boxShadow = '';
+          // Remove listener
+          vulnerableElement.removeEventListener('click', enableHintButton);
+        };
+        
+        vulnerableElement.addEventListener('click', enableHintButton, { once: true });
       }
     }
   }
