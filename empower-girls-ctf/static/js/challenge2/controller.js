@@ -501,11 +501,8 @@ class Challenge2Controller {
         });
       }
       
-      // Decrement score for incorrect answer
-      this.scoringManager.decrementScore();
-      this.updateScoreDisplay();
-      
-      // Save progress after score change
+      // Wrong answers don't affect score - only hints deduct and correct answers add
+      // Save progress
       this.saveProgress();
       
       // Show incorrect feedback
