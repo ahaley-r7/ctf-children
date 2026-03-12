@@ -455,6 +455,22 @@ class Challenge2Controller {
       this.vulnerabilityManager.markDiscovered(this.currentVulnerability.id);
       this.discoveredCount++;
       
+      // Add tooltip to the discovered vulnerability
+      if (this.currentAreaElement && window.tippy) {
+        // Destroy existing tooltip if any
+        if (this.currentAreaElement._tippy) {
+          this.currentAreaElement._tippy.destroy();
+        }
+        // Create new tooltip
+        window.tippy(this.currentAreaElement, {
+          content: 'Vulnerability already discovered',
+          trigger: 'mouseenter click',
+          placement: 'top',
+          theme: 'light-border',
+          arrow: true
+        });
+      }
+      
       // Show correct feedback
       this.feedbackManager.showCorrectFeedback(this.currentVulnerability.question.explanation);
       
@@ -468,6 +484,22 @@ class Challenge2Controller {
       // Mark vulnerability as discovered even for wrong answer (one chance only)
       this.vulnerabilityManager.markDiscovered(this.currentVulnerability.id);
       this.discoveredCount++;
+      
+      // Add tooltip to the attempted vulnerability
+      if (this.currentAreaElement && window.tippy) {
+        // Destroy existing tooltip if any
+        if (this.currentAreaElement._tippy) {
+          this.currentAreaElement._tippy.destroy();
+        }
+        // Create new tooltip
+        window.tippy(this.currentAreaElement, {
+          content: 'Already tried this vulnerability!',
+          trigger: 'mouseenter click',
+          placement: 'top',
+          theme: 'light-border',
+          arrow: true
+        });
+      }
       
       // Decrement score for incorrect answer
       this.scoringManager.decrementScore();
