@@ -49,6 +49,13 @@ htmlcov/
 *.robot
 resources/
 config/
+robot.yaml
+run_tests.py
+run_tests.sh
+playwright-log.txt
+
+# Kiro IDE
+.kiro/
 
 # Temporary files
 *.tmp
