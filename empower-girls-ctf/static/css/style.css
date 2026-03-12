@@ -4219,3 +4219,123 @@ body:has(.feedback-modal) #hint-card-container {
 .card.border-success .card-title {
   color: #28a745;
 }
+
+
+/* Progress Indicator Styles */
+.progress-indicator-container {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    padding: 1.5rem 0;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.progress-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.progress-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #444;
+    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    border: 3px solid #444;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.progress-step.active .progress-circle {
+    background: #FF6200;
+    color: white;
+    border-color: #FF6200;
+    box-shadow: 0 0 20px rgba(255, 98, 0, 0.5);
+    animation: pulse 2s infinite;
+}
+
+.progress-step.completed .progress-circle {
+    background: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+
+.progress-step.completed .progress-circle::after {
+    content: '✓';
+    position: absolute;
+    font-size: 1.5rem;
+}
+
+.progress-label {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #999;
+    font-weight: 500;
+    text-align: center;
+}
+
+.progress-step.active .progress-label {
+    color: #FF6200;
+    font-weight: bold;
+}
+
+.progress-step.completed .progress-label {
+    color: #28a745;
+}
+
+.progress-line {
+    width: 80px;
+    height: 3px;
+    background: #444;
+    margin: 0 10px;
+    position: relative;
+    top: -25px;
+}
+
+.progress-line.completed {
+    background: #28a745;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@media (max-width: 768px) {
+    .progress-indicator {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .progress-line {
+        display: none;
+    }
+    
+    .progress-circle {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .progress-label {
+        font-size: 0.75rem;
+    }
+}

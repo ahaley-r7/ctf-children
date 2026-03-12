@@ -61,6 +61,40 @@
 
     <!-- Wrap main content in a flex-growing div -->
     <div class="content-wrapper">
+        <!-- Progress Indicator (only show on challenge pages) -->
+        {% if request.endpoint and 'challenge' in request.endpoint %}
+        <div class="progress-indicator-container">
+            <div class="container">
+                <div class="progress-indicator">
+                    <div class="progress-step {% if 'challenge1' in request.endpoint %}active{% elif request.endpoint in ['challenge2', 'challenge3', 'challenge4', 'challenge5'] %}completed{% endif %}">
+                        <div class="progress-circle">1</div>
+                        <div class="progress-label">Phishing</div>
+                    </div>
+                    <div class="progress-line {% if request.endpoint in ['challenge2', 'challenge3', 'challenge4', 'challenge5'] %}completed{% endif %}"></div>
+                    <div class="progress-step {% if 'challenge2' in request.endpoint %}active{% elif request.endpoint in ['challenge3', 'challenge4', 'challenge5'] %}completed{% endif %}">
+                        <div class="progress-circle">2</div>
+                        <div class="progress-label">Scanner</div>
+                    </div>
+                    <div class="progress-line {% if request.endpoint in ['challenge3', 'challenge4', 'challenge5'] %}completed{% endif %}"></div>
+                    <div class="progress-step {% if 'challenge3' in request.endpoint %}active{% elif request.endpoint in ['challenge4', 'challenge5'] %}completed{% endif %}">
+                        <div class="progress-circle">3</div>
+                        <div class="progress-label">Cipher</div>
+                    </div>
+                    <div class="progress-line {% if request.endpoint in ['challenge4', 'challenge5'] %}completed{% endif %}"></div>
+                    <div class="progress-step {% if 'challenge4' in request.endpoint %}active{% elif request.endpoint == 'challenge5' %}completed{% endif %}">
+                        <div class="progress-circle">4</div>
+                        <div class="progress-label">Password</div>
+                    </div>
+                    <div class="progress-line {% if request.endpoint == 'challenge5' %}completed{% endif %}"></div>
+                    <div class="progress-step {% if 'challenge5' in request.endpoint %}active{% endif %}">
+                        <div class="progress-circle">5</div>
+                        <div class="progress-label">AI Prompt</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
         <div class="container my-4">
             <div class="ctf-container">
                 {% block content %}{% endblock %}
