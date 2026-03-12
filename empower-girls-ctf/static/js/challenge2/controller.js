@@ -31,6 +31,7 @@ class Challenge2Controller {
     // State machine
     this.currentState = 'initial'; // initial, scanning, lesson, question, feedback, complete
     this.discoveredCount = 0;
+    this.attemptedCount = 0; // Track number of vulnerabilities attempted (for progressive difficulty)
     this.currentVulnerability = null;
     
     // Hint system
@@ -129,6 +130,8 @@ class Challenge2Controller {
           });
           
           this.discoveredCount = progress.discoveredVulnerabilities.length;
+          // Attempted count equals discovered count when loading progress
+          this.attemptedCount = progress.discoveredVulnerabilities.length;
         }
         
         // Restore score
@@ -211,6 +214,9 @@ class Challenge2Controller {
       console.error(`Challenge2Controller: Vulnerability not found: ${vulnerabilityId}`);
       return;
     }
+    
+    // Increment attempted count for progressive difficulty
+    this.attemptedCount++;
     
     // DO NOT mark as discovered yet - only mark after correct answer
     // this.vulnerabilityManager.markDiscovered(vulnerabilityId);
@@ -343,8 +349,8 @@ class Challenge2Controller {
       this.hintCardContainer.classList.add('d-none');
     }
     
-    // Show question with progressive difficulty
-    this.questionManager.showQuestion(this.currentVulnerability, this.discoveredCount);
+    // Show question with progressive difficulty based on attempts (not discoveries)
+    this.questionManager.showQuestion(this.currentVulnerability, this.attemptedCount);
   }
   
   /**
