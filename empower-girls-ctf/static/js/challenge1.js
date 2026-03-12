@@ -222,7 +222,24 @@ document.addEventListener('DOMContentLoaded', function() {
   // Set up the start button functionality
   const startBtn = document.getElementById('start-btn');
   if (startBtn) {
-    startBtn.addEventListener('click', function() {
+    startBtn.addEventListener('click', async function() {
+      // Disable button and show loading state
+      startBtn.disabled = true;
+      const originalText = startBtn.innerHTML;
+      startBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Loading...';
+      
+      try {
+        // Preload images from challenge content
+        const challengeContent = document.querySelector('.challenge-content');
+        if (challengeContent && window.imagePreloader) {
+          await window.imagePreloader.preloadFromContainer(challengeContent);
+          const stats = window.imagePreloader.getStats();
+          console.log(`Preloaded ${stats.loaded} images, ${stats.failed} failed`);
+        }
+      } catch (error) {
+        console.error('Error preloading images:', error);
+      }
+      
       // Mark intro as completed
       localStorage.setItem('challenge1_introCompleted', 'true');
       

@@ -1338,7 +1338,24 @@ document.addEventListener('DOMContentLoaded', function() {
   // Wait for the intro "Let's Decode!" button
   const startBtn = document.getElementById('start-btn');
   if (startBtn) {
-    startBtn.addEventListener('click', function() {
+    startBtn.addEventListener('click', async function() {
+      // Disable button and show loading state
+      startBtn.disabled = true;
+      const originalText = startBtn.innerHTML;
+      startBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Loading...';
+      
+      try {
+        // Preload images from challenge content
+        const challengeContent = document.querySelector('.challenge3-content');
+        if (challengeContent && window.imagePreloader) {
+          await window.imagePreloader.preloadFromContainer(challengeContent);
+          const stats = window.imagePreloader.getStats();
+          console.log(`Preloaded ${stats.loaded} images, ${stats.failed} failed`);
+        }
+      } catch (error) {
+        console.error('Error preloading images:', error);
+      }
+      
       // Mark intro as completed using ProgressManager
       progressManager.saveProgress({ introCompleted: true });
       
@@ -1349,7 +1366,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       
       // Show challenge content
-      const challengeContent = document.querySelector('.challenge3-content');
       if (challengeContent) {
         challengeContent.classList.remove('d-none');
       }

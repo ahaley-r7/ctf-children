@@ -4269,7 +4269,7 @@ body:has(.feedback-modal) #hint-card-container {
 
 .progress-step.completed .progress-circle {
     background: #28a745;
-    color: white;
+    color: transparent;
     border-color: #28a745;
 }
 
@@ -4277,6 +4277,7 @@ body:has(.feedback-modal) #hint-card-container {
     content: '✓';
     position: absolute;
     font-size: 1.5rem;
+    color: white;
 }
 
 .progress-label {

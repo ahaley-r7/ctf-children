@@ -248,6 +248,17 @@ class ScannerManager {
         // Check if already discovered (correct answer)
         if (this.vulnerabilityManager && this.vulnerabilityManager.isDiscovered(vulnerabilityId)) {
           console.log(`Vulnerability ${vulnerabilityId} already discovered`);
+          // Show tooltip if tippy is available
+          if (window.tippy && !areaElement._tippy) {
+            window.tippy(areaElement, {
+              content: 'Vulnerability already discovered',
+              trigger: 'mouseenter',
+              placement: 'top',
+              theme: 'light-border'
+            });
+            // Trigger the tooltip to show immediately
+            areaElement._tippy.show();
+          }
           return;
         }
 
@@ -270,9 +281,19 @@ class ScannerManager {
       // Add cursor pointer to indicate clickable
       areaElement.style.cursor = 'pointer';
       
-      // Add hover effect
+      // Add tooltip for discovered vulnerabilities on hover
       areaElement.addEventListener('mouseenter', () => {
-        if (!this.clickedVulnerabilities.has(vulnerabilityId)) {
+        // Check if discovered and add tooltip
+        if (this.vulnerabilityManager && this.vulnerabilityManager.isDiscovered(vulnerabilityId)) {
+          if (window.tippy && !areaElement._tippy) {
+            window.tippy(areaElement, {
+              content: 'Vulnerability already discovered',
+              trigger: 'mouseenter',
+              placement: 'top',
+              theme: 'light-border'
+            });
+          }
+        } else if (!this.clickedVulnerabilities.has(vulnerabilityId)) {
           areaElement.style.opacity = '0.8';
         }
       });

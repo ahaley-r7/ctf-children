@@ -112,9 +112,25 @@ document.addEventListener('DOMContentLoaded', () => {
    * Handle Start button click - show challenge content
    */
   if (startBtn) {
-    startBtn.addEventListener('click', (e) => {
+    startBtn.addEventListener('click', async (e) => {
       e.preventDefault();
-      console.log('Start button clicked - initializing challenge');
+      console.log('Start button clicked - preloading images...');
+      
+      // Disable button and show loading state
+      startBtn.disabled = true;
+      const originalText = startBtn.innerHTML;
+      startBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Loading...';
+      
+      try {
+        // Preload images from challenge content
+        if (challengeContent && window.imagePreloader) {
+          await window.imagePreloader.preloadFromContainer(challengeContent);
+          const stats = window.imagePreloader.getStats();
+          console.log(`Preloaded ${stats.loaded} images, ${stats.failed} failed`);
+        }
+      } catch (error) {
+        console.error('Error preloading images:', error);
+      }
       
       // Mark intro as completed
       localStorage.setItem('challenge2_introCompleted', 'true');

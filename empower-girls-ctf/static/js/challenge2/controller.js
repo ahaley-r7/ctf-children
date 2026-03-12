@@ -212,9 +212,9 @@ class Challenge2Controller {
       return;
     }
     
-    // Mark as discovered
-    this.vulnerabilityManager.markDiscovered(vulnerabilityId);
-    this.discoveredCount++;
+    // DO NOT mark as discovered yet - only mark after correct answer
+    // this.vulnerabilityManager.markDiscovered(vulnerabilityId);
+    // this.discoveredCount++;
     
     // Store current vulnerability and area element for later feedback
     this.currentVulnerability = vulnerability;
@@ -410,6 +410,10 @@ class Challenge2Controller {
     }
     
     if (isCorrect) {
+      // Mark vulnerability as discovered only after correct answer
+      this.vulnerabilityManager.markDiscovered(this.currentVulnerability.id);
+      this.discoveredCount++;
+      
       // Show correct feedback
       this.feedbackManager.showCorrectFeedback(this.currentVulnerability.question.explanation);
       
@@ -420,6 +424,10 @@ class Challenge2Controller {
       // Save progress after score change
       this.saveProgress();
     } else {
+      // Mark vulnerability as discovered even for wrong answer (one chance only)
+      this.vulnerabilityManager.markDiscovered(this.currentVulnerability.id);
+      this.discoveredCount++;
+      
       // Decrement score for incorrect answer
       this.scoringManager.decrementScore();
       this.updateScoreDisplay();

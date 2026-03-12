@@ -102,10 +102,26 @@ const progressManager = new ProgressManager('challenge4');
     // Set up start button
     const startBtn = document.getElementById('start-btn');
     if (startBtn) {
-      startBtn.addEventListener('click', function() {
+      startBtn.addEventListener('click', async function() {
+        // Disable button and show loading state
+        startBtn.disabled = true;
+        const originalText = startBtn.innerHTML;
+        startBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Loading...';
+        
+        try {
+          // Preload images from challenge content
+          const challengeContent = document.querySelector('.challenge-content');
+          if (challengeContent && window.imagePreloader) {
+            await window.imagePreloader.preloadFromContainer(challengeContent);
+            const stats = window.imagePreloader.getStats();
+            console.log(`Preloaded ${stats.loaded} images, ${stats.failed} failed`);
+          }
+        } catch (error) {
+          console.error('Error preloading images:', error);
+        }
+        
         localStorage.setItem('challenge4_introCompleted', 'true');
         const introCard = document.getElementById('intro-card');
-        const challengeContent = document.querySelector('.challenge-content');
         if (introCard) {
           introCard.classList.add('d-none');
         }

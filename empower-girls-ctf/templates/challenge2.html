@@ -13,13 +13,13 @@
     <div class="container-fluid py-3">
       <!-- Challenge Header -->
       <div class="row justify-content-center mb-4">
-        <div class="col-lg-10">
+        <div class="col-lg-11">
           {{ challenge_header('Challenge 2: AppSpider Security Scanner', 'Click on vulnerable areas to discover security problems, then answer questions to fix them!', 'fa-shield-alt') }}
         </div>
       </div>
 
       <div class="row justify-content-center">
-        <div class="col-lg-10 d-flex flex-column align-items-center">
+        <div class="col-lg-11 d-flex flex-column align-items-center">
 
           <div id="scanner-section" class="text-center mb-4">
             <!-- Enhanced scan button with glowing effect -->
@@ -90,19 +90,19 @@
                   <div class="product-card">
                     <img src="{{ url_for('static', filename='images/super-gadget.png') }}" alt="SuperGadget 3000" class="product-image">
                     <h3 class="product-name">SuperGadget 3000</h3>
-                    <p class="product-price">$99.99</p>
+                    <p class="product-price">£99.99</p>
                     <button class="btn-add-cart">Add to Cart</button>
                   </div>
                   <div class="product-card">
                     <img src="{{ url_for('static', filename='images/product-image.png') }}" alt="MegaTool 2.0" class="product-image">
                     <h3 class="product-name">MegaTool 2.0</h3>
-                    <p class="product-price">$149.99</p>
+                    <p class="product-price">£149.99</p>
                     <button class="btn-add-cart">Add to Cart</button>
                   </div>
                   <div class="product-card">
                     <img src="{{ url_for('static', filename='images/appspider-can.png') }}" alt="AppSpider in a Can" class="product-image">
                     <h3 class="product-name">AppSpider in a Can</h3>
-                    <p class="product-price">$79.99</p>
+                    <p class="product-price">£79.99</p>
                     <button class="btn-add-cart">Add to Cart</button>
                   </div>
                 </div>
@@ -209,7 +209,6 @@
   <div id="lesson-modal" class="lesson-modal">
     <div class="lesson-modal-overlay"></div>
     <div class="lesson-modal-content">
-      <button class="lesson-modal-close" aria-label="Close modal">&times;</button>
       <div class="lesson-modal-header">
         {{ lesson_modal_header }}
       </div>
