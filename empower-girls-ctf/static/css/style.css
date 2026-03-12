@@ -4205,7 +4205,6 @@ body:has(.feedback-modal) #hint-card-container {
 
 .card.border-warning .card-title {
   color: #9b59b6;
-  font-weight: 600;
 }
 
 .card.border-info .card-title {
